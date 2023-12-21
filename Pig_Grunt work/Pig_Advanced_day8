@@ -1,0 +1,46 @@
+stocks =load '$INPUTFILE' USING PigStorage(',');
+
+pig -p INPUTFILE=NYSE_daily_prices_A.csv
+myscript.pig
+
+#internally  $INPUTFILE <= NYSE_daily_prices_A.csv
+# -p is parameter
+
+
+# or for multiple parameters
+
+pig -param_file stock.params myscript.pig
+
+# where -param_file is to set parameter file
+
+stock.params conatins
+'
+INPUTFILE=NYSE_daily_prices_A.csv
+INPUT1=13
+INPUT3=location
+'
+myscript.pig
+'
+stocks =load '$INPUTFILE' USING PigStorage(',');
+C = ORDER D BY $0 PARALLEL $INPUT1 ;
+
+A = FOREACH employees GENERATE name, $INPUT3 , FLATTEN (phone_number);
+
+'
+
+
+#PARALLEL
+
+is used to define the number of reducers
+
+C = ORDER D BY $0 PARALLEL 5;
+
+
+#FLATTEN
+
+is used to unwind like mongo and work on only Bags
+
+A = FOREACH employees GENERATE name,laocation, FLATTEN (phone_number);
+
+
+

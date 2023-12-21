@@ -1,0 +1,6 @@
+stocks = load '$INPUTFILE' using PigStorage(',');
+last10 = limit stocks 10;
+dump last10;
+
+
+
