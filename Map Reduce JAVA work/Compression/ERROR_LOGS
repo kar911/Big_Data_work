@@ -1,0 +1,30 @@
+2012-10-15 08:31:50,117 ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: java.net.UnknownHostException: node: node
+2012-10-15 08:31:44,135 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception and over retry limit, suppressing further error messages
+2012-10-15 08:31:39,545 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception, retry in 4588ms
+2012-10-15 08:31:29,466 ERROR org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Error getting localhost name. Using 'localhost'...
+2012-10-15 08:31:09,113 ERROR org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31: java.net.UnknownHostException: node: node
+2012-10-15 08:25:05,460 ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: java.net.UnknownHostException: node: node
+2012-10-15 08:25:03,168 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception and over retry limit, suppressing further error messages
+2012-10-15 08:24:55,240 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception, retry in 7926ms
+2012-10-15 08:24:45,225 ERROR org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Error getting localhost name. Using 'localhost'...
+2012-10-15 08:24:25,125 ERROR org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31: java.net.UnknownHostException: node: node
+2012-10-15 08:11:48,113 ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: java.net.UnknownHostException: node: node
+2012-10-15 08:11:38,087 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception and over retry limit, suppressing further error messages
+2012-10-15 08:11:37,542 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception, retry in 542ms
+2012-10-15 08:11:27,466 ERROR org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Error getting localhost name. Using 'localhost'...
+2012-10-15 08:11:07,074 ERROR org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31: java.net.UnknownHostException: node: node
+2012-10-15 08:31:51,323 ERROR org.apache.hadoop.hdfs.server.namenode.NameNode: java.net.UnknownHostException: Invalid hostname for server: node
+2012-10-15 08:31:42,947 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception and over retry limit, suppressing further error messages
+2012-10-15 08:31:39,546 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception, retry in 3399ms
+2012-10-15 08:31:29,463 ERROR org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Error getting localhost name. Using 'localhost'...
+2012-10-15 08:31:09,110 ERROR org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31: java.net.UnknownHostException: node: node
+2012-10-15 08:25:03,920 ERROR org.apache.hadoop.hdfs.server.namenode.NameNode: java.net.UnknownHostException: Invalid hostname for server: node
+2012-10-15 08:25:01,334 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception and over retry limit, suppressing further error messages
+2012-10-15 08:24:53,073 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception, retry in 8260ms
+2012-10-15 08:24:43,055 ERROR org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Error getting localhost name. Using 'localhost'...
+2012-10-15 08:24:22,955 ERROR org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31: java.net.UnknownHostException: node: node
+2012-10-15 08:11:49,328 ERROR org.apache.hadoop.hdfs.server.namenode.NameNode: java.net.UnknownHostException: Invalid hostname for server: node
+2012-10-15 08:11:45,125 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception and over retry limit, suppressing further error messages
+2012-10-15 08:11:37,542 ERROR org.apache.hadoop.metrics2.impl.MetricsSinkAdapter: Got sink exception, retry in 7581ms
+2012-10-15 08:11:27,463 ERROR org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Error getting localhost name. Using 'localhost'...
+2012-10-15 08:11:07,069 ERROR org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31: java.net.UnknownHostException: node: node
