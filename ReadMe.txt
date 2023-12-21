@@ -1,7 +1,7 @@
 # Big Data Work
 - Hive
--- scripts
--- quaries
+  - scripts
+  - quaries
 - Pig
--- scripts
--- quaries
+  - scripts
+  - quaries
