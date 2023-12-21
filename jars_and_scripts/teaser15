@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Function to convert Fahrenheit to Celsius
+convert_f_to_c() {
+    F=$1
+    C=$(echo "scale=2;($F-32)*(5/9)" | bc)
+    echo $C
+}
+
+# Function to convert Celsius to Fahrenheit
+convert_c_to_f() {
+    C=$1
+    F=$(echo "scale=2;($C*9/5)+32" | bc)
+    echo $F
+}
+
+# Check if an argument was provided
+if [ $# -eq 0 ]; then
+    echo "Please provide an option and a temperature as arguments."
+    exit 1
+fi
+
+# Parse the options
+while getopts ":c:f" opt; do
+  case ${opt} in
+    c )
+      # Convert Celsius to Fahrenheit and print the result
+      converted=$(convert_c_to_f $OPTARG)
+      echo "$OPTARG C in Fahrenheit is $converted F"
+      ;;
+    f )
+      # Convert Fahrenheit to Celsius and print the result
+      converted=$(convert_f_to_c $OPTARG)
+      echo "$OPTARG F in Celsius is $converted C"
+      ;;
+    \? )
+      echo "Invalid option: $OPTARG" 1>&2
+      ;;
+    : )
+      echo "Invalid option: $OPTARG requires an argument" 1>&2
+      ;;
+  esac
+done
+

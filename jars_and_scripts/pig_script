@@ -1,0 +1,4 @@
+A = LOAD 'whitehouse' USING TextLoader();
+B = GROUP A ALL;
+A_count = FOREACH B GENERATE 'rowcount', COUNT(A);
+DUMP A_count;

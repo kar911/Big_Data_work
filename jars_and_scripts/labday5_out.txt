@@ -1,0 +1,498 @@
+
+mysql> create table salaries(
+    -> gender varchar(1),
+    -> age int,
+    -> salary double,
+    -> zipcode int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from salaries;
+Empty set (0.00 sec)
+
+mysql> select * from salaries
+    -> ;
+Empty set (0.00 sec)
+
+mysql> desc s
+sentry            show fields from  source            
+set option        show keys from    status            
+show databases    show tables       system            
+mysql> ddesc salaries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ddesc salaries' at line 1
+mysql> desc salaries;
++---------+------------+------+-----+---------+-------+
+| Field   | Type       | Null | Key | Default | Extra |
++---------+------------+------+-----+---------+-------+
+| gender  | varchar(1) | YES  |     | NULL    |       |
+| age     | int(11)    | YES  |     | NULL    |       |
+| salary  | double     | YES  |     | NULL    |       |
+| zipcode | int(11)    | YES  |     | NULL    |       |
++---------+------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> load data local infile 'salaries.txt' into table salaries;
+Query OK, 50 rows affected, 200 warnings (0.00 sec)
+Records: 50  Deleted: 0  Skipped: 0  Warnings: 200
+
+mysql> select * from salaries;
++--------+------+--------+---------+
+| gender | age  | salary | zipcode |
++--------+------+--------+---------+
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| M      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
+| F      | NULL |   NULL |    NULL |
++--------+------+--------+---------+
+50 rows in set (0.00 sec)
+
+mysql> truncat salaries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'truncat salaries' at line 1
+mysql> truncat table salaries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'truncat table salaries' at line 1
+mysql> turncat table salaries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'turncat table salaries' at line 1
+mysql> truncat table salaries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'truncat table salaries' at line 1
+mysql> truncate table salaries;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from salaries;
+Empty set (0.01 sec)
+
+mysql> load data local infile 'salaries.txt' into table salaries fields terminated by ',';
+Query OK, 50 rows affected (0.01 sec)
+Records: 50  Deleted: 0  Skipped: 0  Warnings: 0
+
+mysql> select * from salaries;
++--------+------+--------+---------+
+| gender | age  | salary | zipcode |
++--------+------+--------+---------+
+| F      |   66 |  41000 |   95103 |
+| M      |   40 |  76000 |   95102 |
+| F      |   58 |  95000 |   95103 |
+| F      |   68 |  60000 |   95105 |
+| M      |   85 |  14000 |   95102 |
+| M      |   14 |      0 |   95105 |
+| M      |   52 |   2000 |   94040 |
+| M      |   67 |  99000 |   94040 |
+| F      |   43 |  11000 |   94041 |
+| F      |   37 |  65000 |   94040 |
+| M      |   72 |  83000 |   94041 |
+| M      |   68 |  15000 |   95103 |
+| F      |   74 |  37000 |   95105 |
+| F      |   15 |      0 |   95050 |
+| F      |   83 |      0 |   94040 |
+| F      |   30 |  10000 |   95101 |
+| M      |   19 |      0 |   95050 |
+| M      |   23 |  89000 |   95105 |
+| M      |    1 |      0 |   95050 |
+| F      |    4 |      0 |   95103 |
+| M      |   23 |  64000 |   94041 |
+| M      |   79 |  15000 |   94040 |
+| F      |   65 |  70000 |   95102 |
+| F      |   96 |   9000 |   95102 |
+| F      |   92 |  56000 |   94041 |
+| M      |   17 |      0 |   95102 |
+| M      |   17 |      0 |   95103 |
+| F      |   17 |      0 |   95050 |
+| M      |   50 |  18000 |   95102 |
+| M      |   15 |      0 |   95103 |
+| M      |    6 |      0 |   95051 |
+| F      |    3 |      0 |   95050 |
+| M      |   44 |  96000 |   94040 |
+| F      |   73 |  12000 |   95102 |
+| M      |   55 |  32000 |   94040 |
+| F      |   82 |  10000 |   95102 |
+| F      |   33 |  29000 |   95050 |
+| M      |   67 |  81000 |   95101 |
+| M      |   31 |  95000 |   94041 |
+| M      |   34 |  61000 |   94040 |
+| F      |   22 |  90000 |   95102 |
+| M      |   66 |  84000 |   95103 |
+| M      |   71 |      0 |   94041 |
+| F      |   16 |      0 |   95102 |
+| F      |   97 |  69000 |   95103 |
+| M      |   48 |  91000 |   95102 |
+| F      |    1 |      0 |   95102 |
+| M      |   45 |  48000 |   94041 |
+| F      |   39 |   3000 |   94040 |
+| F      |   84 |  14000 |   95051 |
++--------+------+--------+---------+
+50 rows in set (0.00 sec)
+
+mysql> load data local infile 'salaries.txt' into table salaries fields terminated by ',';
+Query OK, 50 rows affected (0.01 sec)
+Records: 50  Deleted: 0  Skipped: 0  Warnings: 0
+
+mysql> alter table salaries add column `id int (10) insigned primary key auto_increment;
+    `> Ctrl-C -- exit!
+Aborted
+[cloudera@quickstart Lab3.1]$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 5.1.73 Source distribution
+
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> alter table salaries add column `id` int (10) insigned primary key auto_increment;
+ERROR 1046 (3D000): No database selected
+mysql> use test;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> alter table salaries add column `id` int (10) insigned primary key auto_increment;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insigned primary key auto_increment' at line 1
+mysql> alter table salaries add column `id` int (10) unsigned primary key auto_increment;
+Query OK, 100 rows affected (0.05 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+mysql> desc salaries;
++---------+------------------+------+-----+---------+----------------+
+| Field   | Type             | Null | Key | Default | Extra          |
++---------+------------------+------+-----+---------+----------------+
+| gender  | varchar(1)       | YES  |     | NULL    |                |
+| age     | int(11)          | YES  |     | NULL    |                |
+| salary  | double           | YES  |     | NULL    |                |
+| zipcode | int(11)          | YES  |     | NULL    |                |
+| id      | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
++---------+------------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select count
+    -> (*) from salaries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from salaries' at line 2
+mysql> select count (*) from salaries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from salaries' at line 1
+mysql> select count(*) from salaries;
++----------+
+| count(*) |
++----------+
+|      100 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from salaries;
++--------+------+--------+---------+-----+
+| gender | age  | salary | zipcode | id  |
++--------+------+--------+---------+-----+
+| F      |   66 |  41000 |   95103 |   1 |
+| M      |   40 |  76000 |   95102 |   2 |
+| F      |   58 |  95000 |   95103 |   3 |
+| F      |   68 |  60000 |   95105 |   4 |
+| M      |   85 |  14000 |   95102 |   5 |
+| M      |   14 |      0 |   95105 |   6 |
+| M      |   52 |   2000 |   94040 |   7 |
+| M      |   67 |  99000 |   94040 |   8 |
+| F      |   43 |  11000 |   94041 |   9 |
+| F      |   37 |  65000 |   94040 |  10 |
+| M      |   72 |  83000 |   94041 |  11 |
+| M      |   68 |  15000 |   95103 |  12 |
+| F      |   74 |  37000 |   95105 |  13 |
+| F      |   15 |      0 |   95050 |  14 |
+| F      |   83 |      0 |   94040 |  15 |
+| F      |   30 |  10000 |   95101 |  16 |
+| M      |   19 |      0 |   95050 |  17 |
+| M      |   23 |  89000 |   95105 |  18 |
+| M      |    1 |      0 |   95050 |  19 |
+| F      |    4 |      0 |   95103 |  20 |
+| M      |   23 |  64000 |   94041 |  21 |
+| M      |   79 |  15000 |   94040 |  22 |
+| F      |   65 |  70000 |   95102 |  23 |
+| F      |   96 |   9000 |   95102 |  24 |
+| F      |   92 |  56000 |   94041 |  25 |
+| M      |   17 |      0 |   95102 |  26 |
+| M      |   17 |      0 |   95103 |  27 |
+| F      |   17 |      0 |   95050 |  28 |
+| M      |   50 |  18000 |   95102 |  29 |
+| M      |   15 |      0 |   95103 |  30 |
+| M      |    6 |      0 |   95051 |  31 |
+| F      |    3 |      0 |   95050 |  32 |
+| M      |   44 |  96000 |   94040 |  33 |
+| F      |   73 |  12000 |   95102 |  34 |
+| M      |   55 |  32000 |   94040 |  35 |
+| F      |   82 |  10000 |   95102 |  36 |
+| F      |   33 |  29000 |   95050 |  37 |
+| M      |   67 |  81000 |   95101 |  38 |
+| M      |   31 |  95000 |   94041 |  39 |
+| M      |   34 |  61000 |   94040 |  40 |
+| F      |   22 |  90000 |   95102 |  41 |
+| M      |   66 |  84000 |   95103 |  42 |
+| M      |   71 |      0 |   94041 |  43 |
+| F      |   16 |      0 |   95102 |  44 |
+| F      |   97 |  69000 |   95103 |  45 |
+| M      |   48 |  91000 |   95102 |  46 |
+| F      |    1 |      0 |   95102 |  47 |
+| M      |   45 |  48000 |   94041 |  48 |
+| F      |   39 |   3000 |   94040 |  49 |
+| F      |   84 |  14000 |   95051 |  50 |
+| F      |   66 |  41000 |   95103 |  51 |
+| M      |   40 |  76000 |   95102 |  52 |
+| F      |   58 |  95000 |   95103 |  53 |
+| F      |   68 |  60000 |   95105 |  54 |
+| M      |   85 |  14000 |   95102 |  55 |
+| M      |   14 |      0 |   95105 |  56 |
+| M      |   52 |   2000 |   94040 |  57 |
+| M      |   67 |  99000 |   94040 |  58 |
+| F      |   43 |  11000 |   94041 |  59 |
+| F      |   37 |  65000 |   94040 |  60 |
+| M      |   72 |  83000 |   94041 |  61 |
+| M      |   68 |  15000 |   95103 |  62 |
+| F      |   74 |  37000 |   95105 |  63 |
+| F      |   15 |      0 |   95050 |  64 |
+| F      |   83 |      0 |   94040 |  65 |
+| F      |   30 |  10000 |   95101 |  66 |
+| M      |   19 |      0 |   95050 |  67 |
+| M      |   23 |  89000 |   95105 |  68 |
+| M      |    1 |      0 |   95050 |  69 |
+| F      |    4 |      0 |   95103 |  70 |
+| M      |   23 |  64000 |   94041 |  71 |
+| M      |   79 |  15000 |   94040 |  72 |
+| F      |   65 |  70000 |   95102 |  73 |
+| F      |   96 |   9000 |   95102 |  74 |
+| F      |   92 |  56000 |   94041 |  75 |
+| M      |   17 |      0 |   95102 |  76 |
+| M      |   17 |      0 |   95103 |  77 |
+| F      |   17 |      0 |   95050 |  78 |
+| M      |   50 |  18000 |   95102 |  79 |
+| M      |   15 |      0 |   95103 |  80 |
+| M      |    6 |      0 |   95051 |  81 |
+| F      |    3 |      0 |   95050 |  82 |
+| M      |   44 |  96000 |   94040 |  83 |
+| F      |   73 |  12000 |   95102 |  84 |
+| M      |   55 |  32000 |   94040 |  85 |
+| F      |   82 |  10000 |   95102 |  86 |
+| F      |   33 |  29000 |   95050 |  87 |
+| M      |   67 |  81000 |   95101 |  88 |
+| M      |   31 |  95000 |   94041 |  89 |
+| M      |   34 |  61000 |   94040 |  90 |
+| F      |   22 |  90000 |   95102 |  91 |
+| M      |   66 |  84000 |   95103 |  92 |
+| M      |   71 |      0 |   94041 |  93 |
+| F      |   16 |      0 |   95102 |  94 |
+| F      |   97 |  69000 |   95103 |  95 |
+| M      |   48 |  91000 |   95102 |  96 |
+| F      |    1 |      0 |   95102 |  97 |
+| M      |   45 |  48000 |   94041 |  98 |
+| F      |   39 |   3000 |   94040 |  99 |
+| F      |   84 |  14000 |   95051 | 100 |
++--------+------+--------+---------+-----+
+100 rows in set (0.00 sec)
+
+mysql> delete from salaries where id > 50;
+Query OK, 50 rows affected (0.01 sec)
+
+mysql> select * from salaries;
++--------+------+--------+---------+----+
+| gender | age  | salary | zipcode | id |
++--------+------+--------+---------+----+
+| F      |   66 |  41000 |   95103 |  1 |
+| M      |   40 |  76000 |   95102 |  2 |
+| F      |   58 |  95000 |   95103 |  3 |
+| F      |   68 |  60000 |   95105 |  4 |
+| M      |   85 |  14000 |   95102 |  5 |
+| M      |   14 |      0 |   95105 |  6 |
+| M      |   52 |   2000 |   94040 |  7 |
+| M      |   67 |  99000 |   94040 |  8 |
+| F      |   43 |  11000 |   94041 |  9 |
+| F      |   37 |  65000 |   94040 | 10 |
+| M      |   72 |  83000 |   94041 | 11 |
+| M      |   68 |  15000 |   95103 | 12 |
+| F      |   74 |  37000 |   95105 | 13 |
+| F      |   15 |      0 |   95050 | 14 |
+| F      |   83 |      0 |   94040 | 15 |
+| F      |   30 |  10000 |   95101 | 16 |
+| M      |   19 |      0 |   95050 | 17 |
+| M      |   23 |  89000 |   95105 | 18 |
+| M      |    1 |      0 |   95050 | 19 |
+| F      |    4 |      0 |   95103 | 20 |
+| M      |   23 |  64000 |   94041 | 21 |
+| M      |   79 |  15000 |   94040 | 22 |
+| F      |   65 |  70000 |   95102 | 23 |
+| F      |   96 |   9000 |   95102 | 24 |
+| F      |   92 |  56000 |   94041 | 25 |
+| M      |   17 |      0 |   95102 | 26 |
+| M      |   17 |      0 |   95103 | 27 |
+| F      |   17 |      0 |   95050 | 28 |
+| M      |   50 |  18000 |   95102 | 29 |
+| M      |   15 |      0 |   95103 | 30 |
+| M      |    6 |      0 |   95051 | 31 |
+| F      |    3 |      0 |   95050 | 32 |
+| M      |   44 |  96000 |   94040 | 33 |
+| F      |   73 |  12000 |   95102 | 34 |
+| M      |   55 |  32000 |   94040 | 35 |
+| F      |   82 |  10000 |   95102 | 36 |
+| F      |   33 |  29000 |   95050 | 37 |
+| M      |   67 |  81000 |   95101 | 38 |
+| M      |   31 |  95000 |   94041 | 39 |
+| M      |   34 |  61000 |   94040 | 40 |
+| F      |   22 |  90000 |   95102 | 41 |
+| M      |   66 |  84000 |   95103 | 42 |
+| M      |   71 |      0 |   94041 | 43 |
+| F      |   16 |      0 |   95102 | 44 |
+| F      |   97 |  69000 |   95103 | 45 |
+| M      |   48 |  91000 |   95102 | 46 |
+| F      |    1 |      0 |   95102 | 47 |
+| M      |   45 |  48000 |   94041 | 48 |
+| F      |   39 |   3000 |   94040 | 49 |
+| F      |   84 |  14000 |   95051 | 50 |
++--------+------+--------+---------+----+
+50 rows in set (0.00 sec)
+
+mysql> exit
+Bye
+[cloudera@quickstart Lab3.1]$ sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/test
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+23/11/03 22:23:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.13.0
+--table or --query is required for import. (Or use sqoop import-all-tables.)
+Try --help for usage instructions.
+[cloudera@quickstart Lab3.1]$ sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/test --driver com.mysql.jdbc.Driver --username root --password cloudera --table salaries
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+23/11/03 22:25:08 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.13.0
+23/11/03 22:25:08 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.
+23/11/03 22:25:08 WARN sqoop.ConnFactory: Parameter --driver is set to an explicit driver however appropriate connection manager is not being set (via --connection-manager). Sqoop is going to fall back to org.apache.sqoop.manager.GenericJdbcManager. Please specify explicitly which connection manager should be used next time.
+23/11/03 22:25:08 INFO manager.SqlManager: Using default fetchSize of 1000
+23/11/03 22:25:08 INFO tool.CodeGenTool: Beginning code generation
+23/11/03 22:25:08 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM salaries AS t WHERE 1=0
+23/11/03 22:25:08 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM salaries AS t WHERE 1=0
+23/11/03 22:25:08 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /usr/lib/hadoop-mapreduce
+Note: /tmp/sqoop-cloudera/compile/314e44e4a457e5edc6f0ff6b25df0bc3/salaries.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+23/11/03 22:25:10 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-cloudera/compile/314e44e4a457e5edc6f0ff6b25df0bc3/salaries.jar
+23/11/03 22:25:10 INFO mapreduce.ImportJobBase: Beginning import of salaries
+23/11/03 22:25:10 INFO Configuration.deprecation: mapred.job.tracker is deprecated. Instead, use mapreduce.jobtracker.address
+23/11/03 22:25:10 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+23/11/03 22:25:10 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM salaries AS t WHERE 1=0
+23/11/03 22:25:11 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+23/11/03 22:25:11 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+23/11/03 22:25:15 INFO db.DBInputFormat: Using read commited transaction isolation
+23/11/03 22:25:15 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM salaries
+23/11/03 22:25:15 INFO db.IntegerSplitter: Split size: 12; Num splits: 4 from: 1 to: 50
+23/11/03 22:25:15 INFO mapreduce.JobSubmitter: number of splits:4
+23/11/03 22:25:15 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1699073844909_0001
+23/11/03 22:25:16 INFO impl.YarnClientImpl: Submitted application application_1699073844909_0001
+23/11/03 22:25:16 INFO mapreduce.Job: The url to track the job: http://quickstart.cloudera:8088/proxy/application_1699073844909_0001/
+23/11/03 22:25:16 INFO mapreduce.Job: Running job: job_1699073844909_0001
+23/11/03 22:25:24 INFO mapreduce.Job: Job job_1699073844909_0001 running in uber mode : false
+23/11/03 22:25:24 INFO mapreduce.Job:  map 0% reduce 0%
+23/11/03 22:25:32 INFO mapreduce.Job:  map 50% reduce 0%
+23/11/03 22:25:33 INFO mapreduce.Job:  map 100% reduce 0%
+23/11/03 22:25:34 INFO mapreduce.Job: Job job_1699073844909_0001 completed successfully
+23/11/03 22:25:34 INFO mapreduce.Job: Counters: 31
+	File System Counters
+		FILE: Number of bytes read=0
+		FILE: Number of bytes written=684940
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=384
+		HDFS: Number of bytes written=1023
+		HDFS: Number of read operations=16
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=8
+	Job Counters 
+		Killed map tasks=1
+		Launched map tasks=4
+		Other local map tasks=4
+		Total time spent by all maps in occupied slots (ms)=18282
+		Total time spent by all reduces in occupied slots (ms)=0
+		Total time spent by all map tasks (ms)=18282
+		Total vcore-milliseconds taken by all map tasks=18282
+		Total megabyte-milliseconds taken by all map tasks=18720768
+	Map-Reduce Framework
+		Map input records=50
+		Map output records=50
+		Input split bytes=384
+		Spilled Records=0
+		Failed Shuffles=0
+		Merged Map outputs=0
+		GC time elapsed (ms)=313
+		CPU time spent (ms)=3650
+		Physical memory (bytes) snapshot=909213696
+		Virtual memory (bytes) snapshot=6340333568
+		Total committed heap usage (bytes)=1092616192
+	File Input Format Counters 
+		Bytes Read=0
+	File Output Format Counters 
+		Bytes Written=1023
+23/11/03 22:25:34 INFO mapreduce.ImportJobBase: Transferred 1,023 bytes in 23.0511 seconds (44.3796 bytes/sec)
+23/11/03 22:25:34 INFO mapreduce.ImportJobBase: Retrieved 50 records.
+[cloudera@quickstart Lab3.1]$ sudo jps
+2719 Bootstrap
+2779 JobHistoryServer
+4779 HRegionServer
+4000 RunJar
+3640 RESTServer
+4655 HistoryServer
+4623 Bootstrap
+2591 SecondaryNameNode
+5458 Bootstrap
+3805 ThriftServer
+2169 QuorumPeerMain
+5491 
+5532 
+8587 Jps
+5266 Bootstrap
+4183 RunJar
+2358 JournalNode
+2451 NameNode
+2911 NodeManager
+3213 ResourceManager
+2243 DataNode
+[cloudera@quickstart Lab3.1]$ sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/test --driver com.mysql.jdbc.Driver --username root --password cloudera --table salaries
+

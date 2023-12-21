@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Function to convert Fahrenheit to Celsius
+convert_temp() {
+    F=$1
+    C=$(echo "scale=2;($F-32)*(5/9)" | bc)
+    echo $C
+}
+
+# Check if an argument was provided
+if [ $# -eq 0 ]; then
+    echo "Please provide a temperature in Fahrenheit as an argument."
+    exit 1
+fi
+
+# Call the function and store the result
+converted=$(convert_temp $1)
+
+# Print the result
+echo "30F in Celsius is $converted C"
+

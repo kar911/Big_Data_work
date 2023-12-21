@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if an argument was provided
+if [ $# -eq 0 ]; then
+    echo "Please provide a temperature in Fahrenheit as an argument."
+    exit 1
+fi
+
+# Fahrenheit temperature is the first argument
+F=$1
+
+# Convert Fahrenheit to Celsius using the formula
+C=$(echo "scale=2;($F-32)*(5/9)" | bc)
+
+# Print the temperature in Celsius
+echo $C
+
