@@ -1,0 +1,6 @@
+SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+
+load data local inpath '/tmp/Partition.txt' into table normal_table;
+
+insert overwrite table dynamic_table partition(country) select id,name,country from  normal_table;

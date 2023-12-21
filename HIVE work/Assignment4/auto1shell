@@ -1,0 +1,25 @@
+#!/bin/bash
+
+hive -f ddl
+
+if [ #? -ne 0 ]
+then
+echo error occured in ddl
+exit 1 
+fi
+
+hive -f dml
+
+if [ #? -ne 0 ]
+then
+echo error occured in dml
+exit 2 
+fi
+
+hive -f dql
+
+if [ #? -ne 0 ]
+then
+echo error occured in dql
+exit 3 
+fi

@@ -1,0 +1,7 @@
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.331 seconds
+OK
+Time taken: 0.007 seconds
+FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. AlreadyExistsException(message:Table normal_table already exists)

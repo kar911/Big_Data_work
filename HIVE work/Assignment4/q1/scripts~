@@ -1,0 +1,47 @@
+-- part 1
+
+--ddl
+
+create table hiredata (Country string, City string, Job_Name string, Salary int) row format delimited fields terminated by ',' ;
+
+--dml
+
+alter table hiredata set TBLPROPERTIES("skip.header.line.count"="1");
+
+
+load data local inpath '/home/cloudera/hdp/pignhive/docs/hire_data/new_hireaa*' into table hiredata;
+
+alter table hiredata set TBLPROPERTIES("skip.header.line.count"="0");
+
+load data local inpath '/home/cloudera/hdp/pignhive/docs/hire_data/new_hire{b..z}*' into table hiredata;
+
+
+--dql
+
+select * from hiredata where city = 'Berlin';
+
+
+-- part 2
+
+--ddl
+
+create table hiredata (Country string, Job_Name string, Salary int) row format delimited fields terminated by ',' ;
+
+create table parti_hiredata (Country string, Job_Name string, Salary int) partitioned by (City string) row format delimited fields terminated by ',' ;
+
+--dml
+
+set hive.exec.dynamic.partition=true;
+set hive.exec.dynamic.partition.mode=nonstrict;
+
+insert overwrite table parti_hiredata partition(City)
+select * from hiredata;
+
+
+
+
+--dql
+
+select * from hiredata where city = 'Berlin';
+
+

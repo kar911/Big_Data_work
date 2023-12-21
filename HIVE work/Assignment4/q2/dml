@@ -1,0 +1,2 @@
+alter table hiredata set TBLPROPERTIES("skip.header.line.count"="1");
+

@@ -1,0 +1,7 @@
+drop table if exist hiredata;
+drop table if exist parti_ hiredata;
+
+create table hiredata (Country string, Job_Name string, Salary int) row format delimited fields terminated by ',' ;
+
+create table parti_hiredata (Country string, Job_Name string, Salary int) partitioned by (City string) row format delimited fields terminated by ',' ;
+

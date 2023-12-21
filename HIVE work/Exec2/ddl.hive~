@@ -1,0 +1,8 @@
+drop table if exists normal_table;
+drop table if exists dynamic_table;
+
+create table normal_table(id  string, name string ,country string)row format delimited fields terminated by '\t';
+
+create table dynamic_table(id  string, name string ) partitioned by (country string) row format delimited fields terminated by '\t';
+
+

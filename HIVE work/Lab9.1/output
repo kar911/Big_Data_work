@@ -1,0 +1,462 @@
+[cloudera@quickstart ~]$ beeline
+Beeline version 1.1.0-cdh5.13.0 by Apache Hive
+beeline> !connect jdbc:hive2://
+scan complete in 1ms
+Connecting to jdbc:hive2://
+Enter username for jdbc:hive2://: q
+Enter password for jdbc:hive2://: *
+Connected to: Apache Hive (version 1.1.0-cdh5.13.0)
+Driver: Hive JDBC (version 1.1.0-cdh5.13.0)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://> select * from orders limit 1;
+OK
++-----------------+--------------------+----------------+------------------+----------------+--------------------+----------------------------------------------------+--+
+| orders.orderid  | orders.order_date  | orders.userid  | orders.username  | orders.gender  | orders.ordertotal  |                  orders.itemlist                   |
++-----------------+--------------------+----------------+------------------+----------------+--------------------+----------------------------------------------------+--+
+| 1               | 2009-01-17         | 22             | Zachary          | M              | 320                | Camcorder,DVD,Table,DVD,Pants,Freezer,Games,Grill,Blanket,Vacuum |
++-----------------+--------------------+----------------+------------------+----------------+--------------------+----------------------------------------------------+--+
+1 row selected (0.81 seconds)
+0: jdbc:hive2://> select * from orders limit 1;
+OK
++-----------------+--------------------+----------------+------------------+----------------+--------------------+----------------------------------------------------+--+
+| orders.orderid  | orders.order_date  | orders.userid  | orders.username  | orders.gender  | orders.ordertotal  |                  orders.itemlist                   |
++-----------------+--------------------+----------------+------------------+----------------+--------------------+----------------------------------------------------+--+
+| 1               | 2009-01-17         | 22             | Zachary          | M              | 320                | Camcorder,DVD,Table,DVD,Pants,Freezer,Games,Grill,Blanket,Vacuum |
++-----------------+--------------------+----------------+------------------+----------------+--------------------+----------------------------------------------------+--+
+1 row selected (0.088 seconds)
+0: jdbc:hive2://> SELECT explode(histogram_numeric(ordertotal,20)) AS x FROM orders
+. . . . . . . . > 
+. . . . . . . . > WHERE itemlist LIKE "%Microwave%";
+Query ID = cloudera_20231118124646_4ec9e55c-6aa5-46e2-9bad-b23dd389d422
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+23/11/18 12:46:51 [HiveServer2-Background-Pool: Thread-34]: WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+Starting Job = job_1700288665180_0004, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1700288665180_0004/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1700288665180_0004
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+23/11/18 12:46:57 [HiveServer2-Background-Pool: Thread-34]: WARN mapreduce.Counters: Group org.apache.hadoop.mapred.Task$Counter is deprecated. Use org.apache.hadoop.mapreduce.TaskCounter instead
+2023-11-18 12:46:57,394 Stage-1 map = 0%,  reduce = 0%
+2023-11-18 12:47:04,700 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.65 sec
+2023-11-18 12:47:10,342 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.74 sec
+MapReduce Total cumulative CPU time: 3 seconds 740 msec
+Ended Job = job_1700288665180_0004
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.74 sec   HDFS Read: 8876805 HDFS Write: 491 SUCCESS
+Total MapReduce CPU Time Spent: 3 seconds 740 msec
+OK
++--------------------------------------+--+
+|                  x                   |
++--------------------------------------+--+
+| {"x":14.333333333333332,"y":3.0}     |
+| {"x":33.87755102040816,"y":441.0}    |
+| {"x":62.52577319587637,"y":679.0}    |
+| {"x":89.37823834196874,"y":965.0}    |
+| {"x":115.1242236024843,"y":1127.0}   |
+| {"x":142.6468885672939,"y":1382.0}   |
+| {"x":174.07664233576656,"y":1370.0}  |
+| {"x":208.06909090909105,"y":1375.0}  |
+| {"x":242.55486381322928,"y":1285.0}  |
+| {"x":275.8625954198475,"y":1048.0}   |
+| {"x":304.71100917431284,"y":872.0}   |
+| {"x":333.1514423076924,"y":832.0}    |
+| {"x":363.7630208333335,"y":768.0}    |
+| {"x":397.51587301587364,"y":756.0}   |
+| {"x":430.9072847682117,"y":604.0}    |
+| {"x":461.68715083798895,"y":537.0}   |
+| {"x":494.1598360655734,"y":488.0}    |
+| {"x":528.5816326530613,"y":294.0}    |
+| {"x":555.5166666666672,"y":180.0}    |
+| {"x":588.7979797979801,"y":198.0}    |
++--------------------------------------+--+
+20 rows selected (22.307 seconds)
+0: jdbc:hive2://> CREATE VIEW max_ordertotal AS
+. . . . . . . . > 
+. . . . . . . . > SELECT max(ordertotal) AS maxtotal, userid FROM orders GROUP BY userid;
+OK
+No rows affected (0.138 seconds)
+0: jdbc:hive2://> SELECT ordertotal, orders.userid, itemlist FROM orders
+. . . . . . . . > JOIN max_ordertotal ON
+. . . . . . . . > 
+. . . . . . . . > max_ordertotal.userid = orders.userid
+. . . . . . . . > 
+. . . . . . . . > AND
+. . . . . . . . > 
+. . . . . . . . > max_ordertotal.maxtotal = orders.ordertotal ORDER BY orders.userid;
+23/11/18 12:56:12 [main]: WARN parse.RowResolver: Duplicate column info for orders.userid was overwritten in RowResolver map: _col1: int by _col1: int
+Query ID = cloudera_20231118125656_9dd77220-931e-4a84-a2e1-99d6afd8a005
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+23/11/18 12:56:13 [HiveServer2-Background-Pool: Thread-63]: WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+Starting Job = job_1700288665180_0005, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1700288665180_0005/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1700288665180_0005
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+23/11/18 12:56:17 [HiveServer2-Background-Pool: Thread-63]: WARN mapreduce.Counters: Group org.apache.hadoop.mapred.Task$Counter is deprecated. Use org.apache.hadoop.mapreduce.TaskCounter instead
+2023-11-18 12:56:17,633 Stage-1 map = 0%,  reduce = 0%
+2023-11-18 12:56:23,913 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.77 sec
+2023-11-18 12:56:29,088 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.11 sec
+MapReduce Total cumulative CPU time: 4 seconds 110 msec
+Ended Job = job_1700288665180_0005
+Execution log at: /tmp/cloudera/cloudera_20231118125656_9dd77220-931e-4a84-a2e1-99d6afd8a005.log
+2023-11-18 12:56:31	Starting to launch local task to process map join;	maximum memory = 932184064
+2023-11-18 12:56:33	Dump the side-table for tag: 0 with group count: 31789 into file: file:/tmp/cloudera/17099aa7-3281-4b9d-8805-399fcf8e2369/hive_2023-11-18_12-56-12_782_4352337848183099922-1/-local-10005/HashTable-Stage-3/MapJoin-mapfile00--.hashtable
+2023-11-18 12:56:33	Uploaded 1 File to: file:/tmp/cloudera/17099aa7-3281-4b9d-8805-399fcf8e2369/hive_2023-11-18_12-56-12_782_4352337848183099922-1/-local-10005/HashTable-Stage-3/MapJoin-mapfile00--.hashtable (6635243 bytes)
+2023-11-18 12:56:33	End of local task; Time Taken: 1.267 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+23/11/18 12:56:34 [HiveServer2-Background-Pool: Thread-63]: WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+23/11/18 12:56:34 [DataStreamer for file /tmp/hadoop-yarn/staging/cloudera/.staging/job_1700288665180_0006/libjars/hive-contrib.jar]: WARN hdfs.DFSClient: Caught exception 
+java.lang.InterruptedException
+	at java.lang.Object.wait(Native Method)
+	at java.lang.Thread.join(Thread.java:1281)
+	at java.lang.Thread.join(Thread.java:1355)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.closeResponder(DFSOutputStream.java:967)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.endBlock(DFSOutputStream.java:705)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:894)
+Starting Job = job_1700288665180_0006, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1700288665180_0006/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1700288665180_0006
+Execution log at: /tmp/cloudera/cloudera_20231118125656_9dd77220-931e-4a84-a2e1-99d6afd8a005.log
+2023-11-18 12:56:31	Starting to launch local task to process map join;	maximum memory = 932184064
+2023-11-18 12:56:33	Dump the side-table for tag: 0 with group count: 31789 into file: file:/tmp/cloudera/17099aa7-3281-4b9d-8805-399fcf8e2369/hive_2023-11-18_12-56-12_782_4352337848183099922-1/-local-10005/HashTable-Stage-3/MapJoin-mapfile00--.hashtable
+2023-11-18 12:56:33	Uploaded 1 File to: file:/tmp/cloudera/17099aa7-3281-4b9d-8805-399fcf8e2369/hive_2023-11-18_12-56-12_782_4352337848183099922-1/-local-10005/HashTable-Stage-3/MapJoin-mapfile00--.hashtable (6635243 bytes)
+2023-11-18 12:56:33	End of local task; Time Taken: 1.267 sec.
+Hadoop job information for Stage-3: number of mappers: 1; number of reducers: 1
+23/11/18 12:56:39 [HiveServer2-Background-Pool: Thread-63]: WARN mapreduce.Counters: Group org.apache.hadoop.mapred.Task$Counter is deprecated. Use org.apache.hadoop.mapreduce.TaskCounter instead
+2023-11-18 12:56:39,679 Stage-3 map = 0%,  reduce = 0%
+2023-11-18 12:56:44,853 Stage-3 map = 100%,  reduce = 0%, Cumulative CPU 0.98 sec
+2023-11-18 12:56:51,130 Stage-3 map = 100%,  reduce = 100%, Cumulative CPU 2.07 sec
+MapReduce Total cumulative CPU time: 2 seconds 70 msec
+Ended Job = job_1700288665180_0006
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 4.11 sec   HDFS Read: 8874885 HDFS Write: 2216 SUCCESS
+Stage-Stage-3: Map: 1  Reduce: 1   Cumulative CPU: 2.07 sec   HDFS Read: 11517 HDFS Write: 18551 SUCCESS
+Total MapReduce CPU Time Spent: 6 seconds 180 msec
+OK
++-------------+----------------+----------------------------------------------------+--+
+| ordertotal  | orders.userid  |                      itemlist                      |
++-------------+----------------+----------------------------------------------------+--+
+| 608         | 1              | Headphones,Air Compressor,2-Way Radio,Jeans,Pants,Blankets,Camcorder,Boots,Sweater,Games,Bicycle,Printers |
+| 605         | 2              | Table,Boots,Coffee Maker,Microwave,Bicycle,DVD,Grill,pillows,Car Audio,Color Laser Printer,Sweater,Dryer |
+| 606         | 3              | Dolls,Headphones,Grill,Sweater,Jeans,Freezer,Spark Plugs,Air Compressor,Washer,Table,Keychain,Color Laser Printer |
+| 610         | 4              | Washer,DVD,Software,Bicycle,Pants,Adapter,Freezer,DVD,Camcorder,DVD,2-Way Radio,Blankets |
+| 600         | 5              | Bedding,Camcorder,Color Laser Printer,Keychain,Pants,Microwave,Dolls,Adapter,Games,DVD,DVD,Table |
+| 600         | 5              | Microwave,Dryer,Blankets,2-Way Radio,Car Audio,Pillows,Games,DVD,pillows,Headphones,Spark Plugs,Pants |
+| 600         | 5              | DVD,Printers,Pants,Adapter,Games,Cookware,Blanket,Dolls,DVD,Car Seat,Pillows,Color Laser Printer |
+| 600         | 5              | DVD,Adapter,Wrench Set,Dolls,pillows,Pants,DVD,Sweater,Keychain,Table,Car Seat,Cookware |
+| 609         | 6              | 2-Way Radio,Grill,Camcorder,Printers,DVD,Microwave,Sweater,Dryer,Air Compressor,Bicycle,Color Laser Printer,Keychain |
+| 610         | 7              | Coffee Maker,Pants,Vacuum,Blanket,Software,DVD,Grill,Bedding,Washer & Dryer,Cookware,DVD,Sweater |
+| 607         | 8              | Wrench Set,Headphones,Grill,Color Laser Printer,Pillows,Freezer,Vacuum,Coffee Maker,DVD,Dryer,2-Way Radio,Cookware |
+| 608         | 9              | Printers,Sweater,Games,Boots,Dryer,Coffee Maker,Dishwasher,Pants,Software,Spark Plugs,Grill,Washer |
+| 600         | 10             | Grill,DVD,Grill,DVD,DVD,Cookware,2-Way Radio,Vacuum,Washer,Sweater,Games,Dolls |
+| 607         | 11             | Coffee Maker,Bicycle,Washer,Color Laser Printer,Microwave,Air Compressor,Bedding,Blanket,Games,Jeans,Keychain,DVD |
+| 610         | 12             | Pillows,Printers,Washer & Dryer,Grill,Table,Bedding,Pants,Vacuum,Dryer,Blanket,2-Way Radio,DVD |
+| 610         | 12             | Adapter,Microwave,Car Seat,Air Compressor,Pants,Keychain,Jeans,DVD,Color Laser Printer,Washer,Washer & Dryer,pillows |
+| 603         | 13             | DVD,DVD,Boots,Dryer,Vacuum,Blanket,DVD,DVD,2-Way Radio,Pillows,Washer,Camcorder |
+| 603         | 13             | DVD,Boots,DVD,Blankets,Headphones,Refrigerator,Microwave,Pants,Games,DVD,Washer,DVD |
+| 600         | 14             | Games,Blanket,Pants,DVD,Microwave,Washer,Jeans,Bicycle,Air Compressor,Color Laser Printer,pillows,Headphones |
+| 612         | 15             | Bicycle,Washer & Dryer,Sweater,DVD,Blanket,Car Audio,Camcorder,Microwave,2-Way Radio,pillows,Pants,Keychain |
+| 603         | 16             | Pillows,Refrigerator,pillows,Microwave,Dolls,Software,Wrench Set,DVD,Camcorder,Grill,Car Audio,Spark Plugs |
+| 611         | 17             | Table,Bedding,Software,Grill,Headphones,Car Seat,Washer & Dryer,Dishwasher,Sweater,DVD,Color Laser Printer,DVD |
+| 600         | 18             | Headphones,Table,Color Laser Printer,Bedding,Coffee Maker,DVD,Air Compressor,Pillows,Games,Washer,Car Seat,Blanket |
+| 612         | 19             | Microwave,Cookware,Dishwasher,Printers,Washer,2-Way Radio,Dolls,Freezer,Bicycle,Jeans,Dryer,Refrigerator |
+| 608         | 20             | Car Audio,Washer,DVD,Keychain,Microwave,pillows,Blanket,Air Compressor,Headphones,Grill,Color Laser Printer,Grill |
+| 610         | 21             | Washer & Dryer,Car Seat,Blanket,Color Laser Printer,Wrench Set,DVD,Cookware,Printers,DVD,Vacuum,Spark Plugs,DVD |
+| 603         | 22             | Dolls,Software,Blankets,Cookware,Bicycle,Color Laser Printer,2-Way Radio,Wrench Set,Blanket,Dishwasher,Printers,Bedding |
+| 604         | 23             | Blanket,Cookware,Coffee Maker,Software,DVD,Grill,Air Compressor,2-Way Radio,Camcorder,Spark Plugs,Dishwasher,Dryer |
+| 611         | 24             | Jeans,Table,Dolls,Pants,DVD,Color Laser Printer,Washer & Dryer,Boots,2-Way Radio,Cookware,Car Seat,Dryer |
+| 599         | 25             | Printers,2-Way Radio,Camcorder,Microwave,Grill,Headphones,Car Seat,DVD,Sweater,Car Audio,DVD,Bicycle |
+| 606         | 26             | Washer,2-Way Radio,Dryer,Pillows,Dolls,Cookware,Coffee Maker,Air Compressor,Blanket,Dishwasher,Jeans,Vacuum |
+| 608         | 27             | Wrench Set,Spark Plugs,Keychain,Freezer,Refrigerator,Air Compressor,Color Laser Printer,Bedding,Washer,DVD,Grill,Car Seat |
+| 604         | 28             | Bedding,2-Way Radio,Washer,Dryer,DVD,Sweater,Vacuum,Keychain,Coffee Maker,Color Laser Printer,Air Compressor,Bicycle |
+| 612         | 29             | Printers,Camcorder,Freezer,Cookware,2-Way Radio,Pants,Dishwasher,Jeans,Table,DVD,Washer & Dryer,Coffee Maker |
+| 600         | 30             | Dolls,Washer & Dryer,Keychain,Boots,Spark Plugs,Games,Blankets,Cookware,DVD,Table,DVD,Pants |
+| 600         | 30             | Printers,Sweater,Headphones,DVD,Dryer,DVD,Jeans,Keychain,Microwave,Games,Dishwasher,Blanket |
+| 604         | 31             | DVD,Color Laser Printer,Jeans,pillows,Grill,Microwave,2-Way Radio,Cookware,Bicycle,DVD,DVD,Adapter |
+| 600         | 32             | Sweater,DVD,DVD,Microwave,Headphones,Air Compressor,Pillows,Coffee Maker,Car Audio,Software,DVD,Refrigerator |
+| 610         | 33             | DVD,Camcorder,Headphones,DVD,2-Way Radio,Wrench Set,Dolls,Air Compressor,Bedding,Software,Pants,Car Seat |
+| 600         | 34             | Boots,Washer,Sweater,Jeans,Cookware,Wrench Set,Microwave,Refrigerator,Headphones,Dishwasher,Dryer,Bedding |
+| 610         | 35             | Table,Sweater,Dishwasher,Washer,Headphones,pillows,Air Compressor,Coffee Maker,Washer & Dryer,Cookware,Blankets,Car Audio |
+| 610         | 36             | DVD,Bedding,Printers,Grill,2-Way Radio,Bicycle,Car Seat,Camcorder,Sweater,Jeans,Keychain,Blankets |
+| 612         | 37             | Printers,DVD,Coffee Maker,Wrench Set,Grill,Color Laser Printer,Headphones,Spark Plugs,Vacuum,Jeans,Cookware,Sweater |
+| 605         | 38             | Adapter,Washer & Dryer,Jeans,DVD,Sweater,Spark Plugs,Car Seat,Air Compressor,Cookware,Dryer,Dishwasher,Boots |
+| 598         | 39             | DVD,DVD,Pillows,Spark Plugs,Washer & Dryer,Sweater,Cookware,Blankets,Blanket,Washer,DVD,Table |
+| 598         | 39             | Jeans,Color Laser Printer,Dryer,Microwave,Pillows,Sweater,Car Audio,Bedding,Headphones,Blanket,Boots,Pants |
+| 609         | 40             | DVD,Refrigerator,Blankets,Wrench Set,Car Audio,Boots,Adapter,Microwave,DVD,pillows,Games,2-Way Radio |
+| 607         | 41             | DVD,Printers,Pillows,Blanket,Adapter,Car Seat,Washer,Air Compressor,Grill,Cookware,DVD,Sweater |
+| 600         | 42             | Car Seat,Table,Adapter,Keychain,Boots,Wrench Set,Coffee Maker,pillows,Pillows,Color Laser Printer,Bedding,Dolls |
+| 600         | 42             | pillows,Pillows,Dolls,Dryer,Printers,Bedding,DVD,Keychain,Games,DVD,Camcorder,Air Compressor |
+| 588         | 43             | pillows,Dryer,Bicycle,Pillows,DVD,Jeans,Vacuum,Grill,Blanket,Washer,Spark Plugs,Washer & Dryer |
+| 611         | 44             | Dishwasher,Washer & Dryer,Freezer,Color Laser Printer,Printers,Blanket,Cookware,Games,Dolls,Camcorder,DVD,2-Way Radio |
+| 608         | 45             | Wrench Set,Boots,Keychain,Adapter,Games,Air Compressor,Vacuum,Sweater,Bicycle,Pillows,Pants,Jeans |
+| 612         | 46             | Dolls,Blanket,Pillows,Car Audio,Coffee Maker,Keychain,Boots,Wrench Set,Headphones,Sweater,Dryer,Color Laser Printer |
+| 605         | 47             | Printers,Grill,Table,Car Seat,DVD,Pillows,Refrigerator,Microwave,Dishwasher,DVD,Coffee Maker,Bicycle |
+| 602         | 48             | DVD,Printers,Adapter,Keychain,pillows,Wrench Set,DVD,Headphones,Bedding,Jeans,Washer & Dryer,Grill |
+| 611         | 49             | pillows,Adapter,Blankets,DVD,Wrench Set,Grill,Bicycle,Car Seat,Washer,DVD,Car Audio,Air Compressor |
+| 602         | 50             | Headphones,Dolls,Sweater,Car Audio,2-Way Radio,Jeans,Printers,Dryer,Vacuum,Refrigerator,Spark Plugs,Grill |
+| 600         | 51             | Bedding,Grill,Car Seat,Dryer,Cookware,Wrench Set,DVD,Spark Plugs,Software,Color Laser Printer,Car Audio,Microwave |
+| 600         | 52             | Software,DVD,Headphones,Cookware,DVD,2-Way Radio,Car Seat,Blanket,Freezer,Pillows,Washer & Dryer,Color Laser Printer |
+| 600         | 52             | Table,Grill,Pants,Grill,Wrench Set,DVD,Jeans,Pillows,Adapter,DVD,Car Seat,Sweater |
+| 600         | 53             | Coffee Maker,Jeans,Dishwasher,Dolls,Blankets,Games,DVD,pillows,Wrench Set,Keychain,Adapter,DVD |
+| 600         | 54             | Table,Wrench Set,Coffee Maker,DVD,Car Audio,Grill,Air Compressor,Vacuum,Car Seat,Sweater,Blanket,DVD |
+| 600         | 54             | Printers,DVD,pillows,Refrigerator,Dolls,Keychain,Car Audio,2-Way Radio,DVD,Freezer,Adapter,Color Laser Printer |
+| 600         | 54             | DVD,DVD,Microwave,Sweater,Grill,Headphones,Blanket,Dryer,Pants,Air Compressor,Grill,Vacuum |
+| 600         | 55             | Dolls,DVD,Washer & Dryer,Grill,DVD,pillows,Color Laser Printer,DVD,Sweater,Bedding,Grill,Vacuum |
+| 600         | 55             | Spark Plugs,Grill,Dolls,Coffee Maker,Car Seat,Keychain,DVD,Blanket,Cookware,Washer,pillows,Bedding |
+| 600         | 55             | Car Seat,Wrench Set,Headphones,Washer,Refrigerator,Keychain,Blanket,Pillows,Table,Air Compressor,DVD,Software |
+| 600         | 55             | Sweater,Dishwasher,Freezer,Jeans,Bedding,Blankets,Vacuum,Printers,DVD,Refrigerator,Table,Washer |
+| 600         | 55             | Blankets,Refrigerator,pillows,Boots,DVD,DVD,Bicycle,DVD,Grill,Wrench Set,Jeans,Car Seat |
+| 600         | 56             | Bedding,pillows,Grill,Headphones,Wrench Set,2-Way Radio,DVD,Pants,Dolls,Dryer,DVD,Color Laser Printer |
+| 600         | 56             | Boots,Refrigerator,Dryer,Sweater,Grill,Printers,Blankets,Vacuum,Jeans,Bedding,Dolls,Software |
+| 600         | 56             | DVD,Bicycle,Sweater,Spark Plugs,Bedding,Blankets,Refrigerator,Jeans,Software,Coffee Maker,Adapter,Air Compressor |
+| 600         | 56             | Pants,Table,Wrench Set,Blanket,Cookware,Bedding,Car Seat,Software,Sweater,Pillows,Air Compressor,Spark Plugs |
+| 588         | 57             | Dryer,Freezer,DVD,Cookware,Grill,Washer,Air Compressor,DVD,Adapter,Table,Color Laser Printer,Washer & Dryer |
+| 600         | 58             | Dishwasher,Coffee Maker,Freezer,2-Way Radio,Boots,Refrigerator,Keychain,Vacuum,Microwave,DVD,Games,Table |
+| 600         | 59             | Freezer,Vacuum,Washer & Dryer,Table,DVD,Bicycle,Blankets,Refrigerator,Pants,Sweater,Grill,Spark Plugs |
+| 600         | 60             | Cookware,Washer,Vacuum,Headphones,Games,Blanket,Bedding,DVD,Boots,Wrench Set,Air Compressor,Jeans |
+| 600         | 60             | Vacuum,Bedding,DVD,Coffee Maker,DVD,Grill,Freezer,Headphones,2-Way Radio,Cookware,Grill,Table |
+| 600         | 60             | Color Laser Printer,Boots,Washer & Dryer,DVD,2-Way Radio,Car Audio,Freezer,DVD,Coffee Maker,Grill,Grill,DVD |
+| 600         | 60             | Grill,Software,Printers,Dolls,Bedding,Dryer,Boots,Car Seat,pillows,Grill,Car Audio,Wrench Set |
+| 600         | 60             | Microwave,Blankets,Software,Dishwasher,DVD,Washer & Dryer,Cookware,Keychain,Bicycle,Car Seat,Washer,DVD |
+| 600         | 61             | Wrench Set,Table,Car Seat,Dryer,Software,Pants,Camcorder,2-Way Radio,Games,DVD,Microwave,Washer |
+| 600         | 61             | Car Audio,Bicycle,Headphones,Wrench Set,Dolls,Sweater,Dishwasher,Printers,DVD,Table,Refrigerator,Washer |
+| 600         | 61             | DVD,Table,Boots,Blankets,Color Laser Printer,Car Seat,DVD,Air Compressor,Coffee Maker,Adapter,Refrigerator,DVD |
+| 600         | 61             | Cookware,DVD,Bedding,Freezer,Dishwasher,Air Compressor,Table,Color Laser Printer,Sweater,Headphones,Boots,Wrench Set |
+| 600         | 62             | Games,Blanket,Washer,DVD,DVD,Spark Plugs,Bicycle,DVD,Bedding,pillows,Microwave,Sweater |
+| 600         | 62             | Dishwasher,Adapter,Vacuum,2-Way Radio,Washer,Wrench Set,Coffee Maker,Spark Plugs,Bedding,pillows,Microwave,Bicycle |
+| 600         | 62             | Blanket,Freezer,Spark Plugs,Grill,Pillows,pillows,DVD,DVD,Dolls,DVD,Grill,Washer |
+| 600         | 63             | 2-Way Radio,Dryer,pillows,Keychain,Headphones,Blanket,Camcorder,DVD,Pants,Air Compressor,Software,Cookware |
+| 600         | 63             | Washer,Dryer,Table,Cookware,Car Audio,Games,Spark Plugs,Vacuum,Bedding,Coffee Maker,Boots,DVD |
+| 600         | 64             | Dolls,Keychain,Coffee Maker,Headphones,Camcorder,Washer,Printers,Vacuum,Cookware,Pillows,Air Compressor,Adapter |
+| 600         | 64             | Vacuum,Spark Plugs,Air Compressor,Keychain,Table,DVD,Microwave,Sweater,pillows,Blanket,Dolls,Pants |
+| 600         | 65             | Car Audio,Microwave,Keychain,Pants,Blankets,Washer,Software,Adapter,Color Laser Printer,Headphones,Blanket,Dishwasher |
+| 588         | 66             | 2-Way Radio,Coffee Maker,Sweater,Blanket,Air Compressor,Grill,DVD,Dolls,Pillows,Wrench Set,Spark Plugs,Jeans |
+| 600         | 67             | Microwave,Software,Adapter,Coffee Maker,Car Audio,Air Compressor,Sweater,Pillows,Dishwasher,DVD,Freezer,DVD |
+| 600         | 67             | Table,Microwave,Color Laser Printer,2-Way Radio,Software,Dolls,Blanket,Camcorder,Coffee Maker,Wrench Set,Spark Plugs,Cookware |
+| 600         | 67             | Headphones,Sweater,Washer,Color Laser Printer,DVD,Bicycle,DVD,Refrigerator,pillows,Car Seat,DVD,Software |
+| 600         | 67             | Cookware,Blankets,Vacuum,Color Laser Printer,Grill,Bedding,Dryer,Software,Pillows,Boots,2-Way Radio,DVD |
+| 588         | 68             | DVD,2-Way Radio,Dryer,Keychain,Boots,Table,Grill,Bicycle,Coffee Maker,Camcorder,Printers,pillows |
++-------------+----------------+----------------------------------------------------+--+
+| ordertotal  | orders.userid  |                      itemlist                      |
++-------------+----------------+----------------------------------------------------+--+
+| 600         | 69             | Spark Plugs,Grill,Pillows,Keychain,Camcorder,DVD,pillows,Printers,Headphones,Blanket,Vacuum,Pants |
+| 600         | 69             | Dryer,DVD,Keychain,Microwave,Adapter,2-Way Radio,pillows,Games,Table,Washer,Boots,Dishwasher |
+| 600         | 70             | DVD,Pants,DVD,Blankets,Dishwasher,Air Compressor,Grill,Headphones,Games,Car Seat,Car Audio,Pillows |
+| 600         | 70             | Cookware,DVD,Table,Color Laser Printer,Washer & Dryer,DVD,Jeans,Vacuum,DVD,Dolls,Wrench Set,Refrigerator |
+| 600         | 71             | Adapter,Microwave,Freezer,Camcorder,DVD,Sweater,Bicycle,DVD,Bedding,DVD,Table,pillows |
+| 600         | 71             | Grill,Blankets,Spark Plugs,Washer,DVD,Pillows,DVD,Boots,Cookware,Color Laser Printer,DVD,2-Way Radio |
+| 600         | 71             | pillows,Bedding,Keychain,Adapter,Table,Bicycle,Color Laser Printer,Dryer,Grill,Coffee Maker,Pillows,Refrigerator |
+| 600         | 72             | DVD,Sweater,Games,Pillows,Refrigerator,Blanket,pillows,Grill,Spark Plugs,Freezer,Air Compressor,Adapter |
+| 600         | 72             | DVD,Blanket,Microwave,Car Seat,Spark Plugs,Air Compressor,Table,Dolls,Games,Vacuum,Wrench Set,Bicycle |
+| 600         | 72             | Dolls,Blanket,Games,DVD,Wrench Set,Grill,Dryer,Printers,Software,Vacuum,Spark Plugs,pillows |
+| 600         | 73             | DVD,Keychain,Cookware,Headphones,Car Audio,Blankets,Grill,DVD,DVD,Boots,Washer & Dryer,Software |
+| 600         | 73             | Pillows,Pants,Camcorder,Keychain,Bicycle,Jeans,Adapter,Grill,DVD,Washer,Air Compressor,Games |
+| 600         | 73             | Table,Freezer,Wrench Set,Pants,Jeans,Cookware,Keychain,Grill,Coffee Maker,Microwave,Blanket,2-Way Radio |
+| 600         | 74             | Washer & Dryer,Camcorder,Grill,Dolls,Table,Sweater,Refrigerator,Washer,Dryer,DVD,DVD,pillows |
+| 600         | 74             | Car Audio,DVD,Blankets,Grill,Software,Adapter,Pillows,Pants,Refrigerator,Coffee Maker,Table,Vacuum |
+| 600         | 74             | Car Seat,Games,Table,Dolls,Jeans,Color Laser Printer,Boots,Pillows,Dryer,DVD,Washer,Wrench Set |
+| 600         | 75             | Blanket,Grill,Dryer,DVD,Keychain,Microwave,Grill,DVD,Software,DVD,Jeans,Pants |
+| 600         | 76             | Vacuum,Pillows,Jeans,pillows,Blankets,Bedding,Car Seat,Washer & Dryer,Games,Printers,Bicycle,DVD |
+| 600         | 77             | Cookware,Freezer,Games,Microwave,Pants,Car Seat,Printers,DVD,Air Compressor,DVD,Camcorder,Blankets |
+| 600         | 78             | Blanket,Blankets,Grill,Keychain,DVD,DVD,Printers,Coffee Maker,Dryer,Sweater,Washer,Software |
+| 600         | 79             | Washer & Dryer,Boots,Cookware,Washer,Wrench Set,Dryer,Table,Pants,Blanket,Bicycle,DVD,Keychain |
+| 600         | 79             | Wrench Set,Washer & Dryer,DVD,Headphones,Coffee Maker,Bedding,DVD,Spark Plugs,DVD,Pillows,Software,Grill |
+| 600         | 79             | Air Compressor,Table,Headphones,Dolls,Printers,Dryer,Spark Plugs,Bicycle,Freezer,DVD,Grill,Blanket |
+| 600         | 79             | Color Laser Printer,Washer & Dryer,Dolls,Pillows,Blanket,Grill,Jeans,Bedding,Games,Sweater,DVD,Blankets |
+| 600         | 79             | Headphones,Table,Dolls,Sweater,Boots,Air Compressor,Camcorder,Games,Blankets,Grill,Adapter,Vacuum |
+| 600         | 80             | Spark Plugs,Dishwasher,Coffee Maker,Color Laser Printer,Dolls,Pants,Headphones,DVD,Cookware,DVD,Grill,Washer & Dryer |
+| 600         | 80             | DVD,Color Laser Printer,Refrigerator,Software,Freezer,Microwave,Printers,Coffee Maker,Sweater,Dishwasher,pillows,Bicycle |
+| 600         | 81             | Cookware,Table,Spark Plugs,DVD,Printers,Grill,Washer & Dryer,Color Laser Printer,Bedding,Pants,Jeans,DVD |
+| 600         | 81             | DVD,Spark Plugs,Printers,Microwave,Car Seat,Air Compressor,DVD,Washer,DVD,2-Way Radio,Keychain,Color Laser Printer |
+| 600         | 82             | pillows,Blanket,Air Compressor,Printers,Car Seat,Boots,Microwave,Grill,Cookware,DVD,Car Audio,DVD |
+| 600         | 82             | Washer,Blanket,DVD,Color Laser Printer,Grill,Pillows,DVD,Adapter,DVD,2-Way Radio,Boots,Refrigerator |
+| 600         | 83             | Bicycle,pillows,Microwave,DVD,Pants,Dishwasher,Boots,Cookware,Blankets,Bedding,Freezer,Games |
+| 600         | 83             | Vacuum,Grill,Pants,Camcorder,Jeans,Dolls,2-Way Radio,Dishwasher,Sweater,Car Audio,Blanket,pillows |
+| 600         | 83             | Microwave,Software,Spark Plugs,2-Way Radio,DVD,Keychain,DVD,Printers,Pillows,Washer & Dryer,Car Seat,Car Audio |
+| 600         | 83             | Blanket,Car Seat,Boots,Car Audio,Dolls,Pants,Washer,Blankets,Spark Plugs,Grill,Refrigerator,Wrench Set |
+| 600         | 84             | Color Laser Printer,Dryer,Washer & Dryer,Keychain,DVD,Camcorder,Bedding,Wrench Set,Washer,Adapter,Vacuum,Car Audio |
+| 600         | 85             | Wrench Set,DVD,2-Way Radio,Grill,Microwave,DVD,DVD,Washer,Spark Plugs,Car Seat,Bedding,Grill |
+| 600         | 86             | Boots,Dryer,Keychain,DVD,Jeans,Pants,Air Compressor,Blankets,Bedding,Washer,Blanket,Washer & Dryer |
+| 600         | 86             | Adapter,Sweater,Boots,DVD,Refrigerator,Jeans,Blanket,Car Audio,Washer,Dryer,DVD,Spark Plugs |
+| 600         | 86             | DVD,Boots,Table,Bedding,Air Compressor,Wrench Set,pillows,Freezer,Grill,Microwave,Games,DVD |
+| 600         | 87             | Spark Plugs,Car Audio,DVD,Headphones,Blanket,DVD,2-Way Radio,Vacuum,Washer,Dryer,Printers,Keychain |
+| 600         | 87             | Blanket,DVD,Grill,Pants,Refrigerator,Dolls,Pillows,Color Laser Printer,Headphones,Software,Jeans,Air Compressor |
+| 600         | 87             | Bicycle,Color Laser Printer,DVD,2-Way Radio,Printers,Headphones,Blankets,pillows,Pillows,Cookware,Refrigerator,Software |
+| 600         | 87             | DVD,Color Laser Printer,Washer & Dryer,Games,Microwave,Sweater,Cookware,Grill,Washer,Vacuum,Car Audio,Bicycle |
+| 600         | 88             | Printers,Pillows,Freezer,Table,Pants,Grill,Coffee Maker,DVD,Blankets,Bicycle,Boots,Adapter |
+| 600         | 88             | Car Audio,Pillows,Air Compressor,DVD,Headphones,Vacuum,Pants,DVD,Adapter,Wrench Set,pillows,Dishwasher |
+| 600         | 88             | Wrench Set,Vacuum,Bedding,Printers,Camcorder,Washer,DVD,Washer & Dryer,Spark Plugs,Cookware,Dolls,Microwave |
+| 600         | 88             | 2-Way Radio,Washer,Spark Plugs,Pillows,Jeans,Washer & Dryer,Vacuum,Bicycle,Printers,Dryer,Air Compressor,DVD |
+| 600         | 89             | pillows,Washer & Dryer,Dishwasher,Software,Grill,Washer,Sweater,Bicycle,Camcorder,Cookware,Color Laser Printer,Grill |
+| 600         | 89             | Jeans,Dishwasher,Freezer,DVD,Pants,Bicycle,Air Compressor,Keychain,DVD,pillows,Cookware,Grill |
+| 588         | 90             | Boots,Grill,Spark Plugs,Vacuum,Coffee Maker,DVD,2-Way Radio,Dolls,Games,DVD,pillows,Pants |
+| 600         | 91             | Refrigerator,Air Compressor,Washer & Dryer,DVD,Grill,Spark Plugs,Dryer,Freezer,Bedding,Sweater,Blanket,Coffee Maker |
+| 600         | 92             | Wrench Set,DVD,Microwave,Dishwasher,Jeans,Freezer,Pants,Color Laser Printer,Car Audio,Keychain,Refrigerator,Dryer |
+| 600         | 92             | Boots,Keychain,Dolls,Adapter,Table,Color Laser Printer,Freezer,Grill,DVD,Sweater,Grill,Refrigerator |
+| 600         | 93             | Dishwasher,Table,Grill,DVD,DVD,DVD,Keychain,Dryer,Washer & Dryer,Grill,Coffee Maker,pillows |
+| 600         | 93             | Printers,Car Seat,Adapter,Jeans,Dryer,DVD,Wrench Set,Table,Bicycle,DVD,Boots,Games |
+| 600         | 93             | Keychain,Headphones,Coffee Maker,DVD,Blankets,Camcorder,Car Seat,Car Audio,Refrigerator,Washer & Dryer,DVD,Adapter |
+| 600         | 93             | Headphones,Color Laser Printer,Washer,Coffee Maker,Wrench Set,Spark Plugs,Printers,Grill,Games,Table,Keychain,Jeans |
+| 588         | 94             | Keychain,Coffee Maker,Pillows,Grill,Washer,Blankets,Color Laser Printer,Table,Boots,Vacuum,Games,Software |
+| 588         | 94             | Software,Table,Adapter,Boots,pillows,Keychain,Car Seat,Dryer,Color Laser Printer,Pants,Printers,DVD |
+| 600         | 95             | Dishwasher,Table,pillows,Bedding,Adapter,Car Seat,Coffee Maker,Bicycle,Grill,Blanket,Refrigerator,Boots |
+| 600         | 96             | Table,Jeans,Washer,Wrench Set,Grill,Color Laser Printer,Dryer,Air Compressor,DVD,Dolls,2-Way Radio,Sweater |
+| 600         | 96             | Vacuum,Air Compressor,2-Way Radio,Blanket,Blankets,Refrigerator,DVD,DVD,Table,Washer,Dolls,Boots |
+| 600         | 97             | Bicycle,Bedding,2-Way Radio,Pillows,Grill,Boots,Dishwasher,Camcorder,DVD,Car Seat,Air Compressor,Headphones |
+| 600         | 97             | Adapter,Camcorder,Boots,Keychain,Car Seat,Blankets,Dishwasher,Bicycle,Grill,Freezer,Wrench Set,DVD |
+| 600         | 98             | Color Laser Printer,Spark Plugs,Bicycle,Games,Freezer,Dolls,2-Way Radio,Adapter,Boots,Cookware,Wrench Set,DVD |
+| 600         | 98             | Grill,Freezer,Bedding,Headphones,DVD,Table,Grill,Software,Dishwasher,DVD,Microwave,Adapter |
+| 600         | 99             | Washer,Cookware,Vacuum,Freezer,2-Way Radio,Bicycle,Washer & Dryer,Coffee Maker,Refrigerator,DVD,Boots,DVD |
+| 600         | 100            | Bicycle,Washer,DVD,Wrench Set,Sweater,2-Way Radio,Pants,Freezer,Blankets,Grill,Adapter,pillows |
++-------------+----------------+----------------------------------------------------+--+
+169 rows selected (39.489 seconds)
+0: jdbc:hive2://> explain SELECT ordertotal, orders.userid, itemlist FROM orders
+. . . . . . . . > JOIN max_ordertotal ON
+. . . . . . . . > 
+. . . . . . . . > max_ordertotal.userid = orders.userid
+. . . . . . . . > 
+. . . . . . . . > AND
+. . . . . . . . > 
+. . . . . . . . > max_ordertotal.maxtotal = orders.ordertotal ORDER BY orders.userid;
+23/11/18 12:58:06 [main]: WARN parse.RowResolver: Duplicate column info for orders.userid was overwritten in RowResolver map: _col1: int by _col1: int
+OK
++----------------------------------------------------+--+
+|                      Explain                       |
++----------------------------------------------------+--+
+| STAGE DEPENDENCIES:                                |
+|   Stage-1 is a root stage                          |
+|   Stage-6 depends on stages: Stage-1               |
+|   Stage-3 depends on stages: Stage-6               |
+|   Stage-0 depends on stages: Stage-3               |
+|                                                    |
+| STAGE PLANS:                                       |
+|   Stage: Stage-1                                   |
+|     Map Reduce                                     |
+|       Map Operator Tree:                           |
+|           TableScan                                |
+|             alias: orders                          |
+|             Statistics: Num rows: 1108388 Data size: 8867105 Basic stats: COMPLETE Column stats: NONE |
+|             Filter Operator                        |
+|               predicate: userid is not null (type: boolean) |
+|               Statistics: Num rows: 554194 Data size: 4433552 Basic stats: COMPLETE Column stats: NONE |
+|               Group By Operator                    |
+|                 aggregations: max(ordertotal)      |
+|                 keys: userid (type: int)           |
+|                 mode: hash                         |
+|                 outputColumnNames: _col0, _col1    |
+|                 Statistics: Num rows: 554194 Data size: 4433552 Basic stats: COMPLETE Column stats: NONE |
+|                 Reduce Output Operator             |
+|                   key expressions: _col0 (type: int) |
+|                   sort order: +                    |
+|                   Map-reduce partition columns: _col0 (type: int) |
+|                   Statistics: Num rows: 554194 Data size: 4433552 Basic stats: COMPLETE Column stats: NONE |
+|                   value expressions: _col1 (type: int) |
+|       Reduce Operator Tree:                        |
+|         Group By Operator                          |
+|           aggregations: max(VALUE._col0)           |
+|           keys: KEY._col0 (type: int)              |
+|           mode: mergepartial                       |
+|           outputColumnNames: _col0, _col1          |
+|           Statistics: Num rows: 277097 Data size: 2216776 Basic stats: COMPLETE Column stats: NONE |
+|           Filter Operator                          |
+|             predicate: _col1 is not null (type: boolean) |
+|             Statistics: Num rows: 277097 Data size: 2216776 Basic stats: COMPLETE Column stats: NONE |
+|             Select Operator                        |
+|               expressions: _col1 (type: int), _col0 (type: int) |
+|               outputColumnNames: _col0, _col1      |
+|               Statistics: Num rows: 277097 Data size: 2216776 Basic stats: COMPLETE Column stats: NONE |
+|               File Output Operator                 |
+|                 compressed: false                  |
+|                 table:                             |
+|                     input format: org.apache.hadoop.mapred.SequenceFileInputFormat |
+|                     output format: org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat |
+|                     serde: org.apache.hadoop.hive.serde2.lazybinary.LazyBinarySerDe |
+|                                                    |
+|   Stage: Stage-6                                   |
+|     Map Reduce Local Work                          |
+|       Alias -> Map Local Tables:                   |
+|         orders                                     |
+|           Fetch Operator                           |
+|             limit: -1                              |
+|       Alias -> Map Local Operator Tree:            |
+|         orders                                     |
+|           TableScan                                |
+|             alias: orders                          |
+|             Statistics: Num rows: 82102 Data size: 8867105 Basic stats: COMPLETE Column stats: NONE |
+|             Filter Operator                        |
+|               predicate: (userid is not null and ordertotal is not null) (type: boolean) |
+|               Statistics: Num rows: 20526 Data size: 2216830 Basic stats: COMPLETE Column stats: NONE |
+|               HashTable Sink Operator              |
+|                 keys:                              |
+|                   0 userid (type: int), ordertotal (type: int) |
+|                   1 _col1 (type: int), _col0 (type: int) |
+|                                                    |
+|   Stage: Stage-3                                   |
+|     Map Reduce                                     |
+|       Map Operator Tree:                           |
+|           TableScan                                |
+|             Map Join Operator                      |
+|               condition map:                       |
+|                    Inner Join 0 to 1               |
+|               keys:                                |
+|                 0 userid (type: int), ordertotal (type: int) |
+|                 1 _col1 (type: int), _col0 (type: int) |
+|               outputColumnNames: _col2, _col5, _col6 |
+|               Statistics: Num rows: 304806 Data size: 2438453 Basic stats: COMPLETE Column stats: NONE |
+|               Select Operator                      |
+|                 expressions: _col5 (type: int), _col2 (type: int), _col6 (type: string) |
+|                 outputColumnNames: _col0, _col1, _col2 |
+|                 Statistics: Num rows: 304806 Data size: 2438453 Basic stats: COMPLETE Column stats: NONE |
+|                 Reduce Output Operator             |
+|                   key expressions: _col1 (type: int) |
+|                   sort order: +                    |
+|                   Statistics: Num rows: 304806 Data size: 2438453 Basic stats: COMPLETE Column stats: NONE |
+|                   value expressions: _col0 (type: int), _col2 (type: string) |
+|       Local Work:                                  |
+|         Map Reduce Local Work                      |
+|       Reduce Operator Tree:                        |
+|         Select Operator                            |
+|           expressions: VALUE._col0 (type: int), KEY.reducesinkkey0 (type: int), VALUE._col1 (type: string) |
+|           outputColumnNames: _col0, _col1, _col2   |
+|           Statistics: Num rows: 304806 Data size: 2438453 Basic stats: COMPLETE Column stats: NONE |
+|           File Output Operator                     |
+|             compressed: false                      |
+|             Statistics: Num rows: 304806 Data size: 2438453 Basic stats: COMPLETE Column stats: NONE |
+|             table:                                 |
++----------------------------------------------------+--+
+|                      Explain                       |
++----------------------------------------------------+--+
+|                 input format: org.apache.hadoop.mapred.TextInputFormat |
+|                 output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat |
+|                 serde: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe |
+|                                                    |
+|   Stage: Stage-0                                   |
+|     Fetch Operator                                 |
+|       limit: -1                                    |
+|       Processor Tree:                              |
+|         ListSink                                   |
+|                                                    |
++----------------------------------------------------+--+
+110 rows selected (0.229 seconds)
+0: jdbc:hive2://> 
+

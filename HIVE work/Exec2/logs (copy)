@@ -1,0 +1,17 @@
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.305 seconds
+OK
+Time taken: 0.007 seconds
+FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. AlreadyExistsException(message:Table normal_table already exists)
+--------------------------------------------
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.3 seconds
+OK
+Time taken: 0.007 seconds
+FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. AlreadyExistsException(message:Table normal_table already exists)
+WARN: The method class org.apache.commons.logging.impl.SLF4JLogFactory#release() was invoked.
+WARN: Please see http://www.slf4j.org/codes.html#release for an explanation.

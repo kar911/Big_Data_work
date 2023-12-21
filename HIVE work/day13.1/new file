@@ -1,0 +1,3 @@
+#!/bin/bash
+read -p "enter table_name " jj
+hive -f hive_command_para -hivevar table=$jj 

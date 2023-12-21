@@ -1,0 +1,22 @@
+select symbol , (max(volume) over (partition by symbol) - volume ) as newdata ,volume , max(volume) over (partition by symbol) from stocks limit 10;
+
+
+select symbol , (max(volume) over (
+partition by symbol order by close rows between 2 preceding and 3 following ) - volume 
+) as newdata ,volume , max(volume) over (partition by symbol) from stocks limit 10;
+
+
+
+select symbol , (max(volume) over (
+partition by symbol order by close rows between unbound preceding and current row
+ ) - volume ) as newdata ,volume , max(volume) over (partition by symbol) from stocks limit 10;
+
+
+
+select symbol , (max(volume) over (
+partition by symbol order by close rows between unbound preceding and unbound
+following
+ ) - volume ) as newdata ,volume , max(volume) over (partition by symbol) from stocks limit 10;
+
+
+

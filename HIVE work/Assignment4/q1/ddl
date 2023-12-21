@@ -1,0 +1,3 @@
+drop table if exists hiredata;
+
+create table hiredata (Country string, City string, Job_Name string, Salary int) row format delimited fields terminated by ',';

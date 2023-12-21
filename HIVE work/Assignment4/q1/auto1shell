@@ -1,0 +1,35 @@
+#!/bin/bash
+
+hive -f ddl
+
+if [ $? -ne 0 ]
+then
+echo error occured in ddl
+exit 1 
+fi
+
+if [ $(wc -l < dml) -lt 2  ]
+then
+
+for i in $(ls -1 "$PWD/"*.* | grep -e 'new_hiresaa'); do echo "load data local inpath '$i' into table hiredata;" >> dml; done;
+echo "alter table hiredata set TBLPROPERTIES("skip.header.line.count"="0");" >> dml
+for i in $(ls -1 "$PWD/"*.* | grep -ve 'new_hiresaa'); do echo "load data local inpath '$i' into table hiredata;" >> dml; done;
+
+
+fi
+
+hive -f dml
+
+if [ $? -ne 0 ]
+then
+echo error occured in dml
+exit 2 
+fi
+
+hive -f dql
+
+if [ $? -ne 0 ]
+then
+echo error occured in dql
+exit 3 
+fi
