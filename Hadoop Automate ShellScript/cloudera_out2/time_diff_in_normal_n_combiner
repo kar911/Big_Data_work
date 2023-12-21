@@ -1,0 +1,21 @@
+Total time spent by all maps in occupied slots (ms)=2976
+		Total time spent by all reduces in occupied slots (ms)=2183
+		Total time spent by all map tasks (ms)=2976
+		Total time spent by all reduce tasks (ms)=2183
+		Total vcore-milliseconds taken by all map tasks=2976
+		Total vcore-milliseconds taken by all reduce tasks=2183
+		Total megabyte-milliseconds taken by all map tasks=3047424
+		Total megabyte-milliseconds taken by all reduce tasks=2235392
+
+
+
+
+		Total time spent by all maps in occupied slots (ms)=2974
+		Total time spent by all reduces in occupied slots (ms)=2289
+		Total time spent by all map tasks (ms)=2974
+		Total time spent by all reduce tasks (ms)=2289
+		Total vcore-milliseconds taken by all map tasks=2974
+		Total vcore-milliseconds taken by all reduce tasks=2289
+		Total megabyte-milliseconds taken by all map tasks=3045376
+		Total megabyte-milliseconds taken by all reduce tasks=2343936
+
