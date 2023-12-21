@@ -1,0 +1,509 @@
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart Lab2.1]$ ls
+data.txt  small_blocks.txt
+[cloudera@quickstart Lab2.1]$ hdfs dfs -put *.txt test/
+[cloudera@quickstart Lab2.1]$ hdfs dfs -ls test/
+Found 3 items
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1
+[cloudera@quickstart Lab2.1]$ hdfs dfs -cp test/data.txt test/test1/data2.txt
+[cloudera@quickstart Lab2.1]$ hdfs dfs -ls -R test
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:51 test/test1
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:51 test/test1/data2.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart Lab2.1]$ hdfs dfs -rm test/test1/data2.tx
+rm: `test/test1/data2.tx': No such file or directory
+[cloudera@quickstart Lab2.1]$ hdfs dfs -rm test/test1/data2.txt
+Deleted test/test1/data2.txt
+[cloudera@quickstart Lab2.1]$ hdfs dfs -ls -R test
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:55 test/test1
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart Lab2.1]$ hdfs dfs -tail test/data.txt
+
+SKLYCD39E0AU58QE,http://www.mystore.com/page76,340
+7Q0MUM8PCJPTOYER,http://www.mystore.com/page84,97
+PK9DYUND0V3CL7WC,http://www.mystore.com/page85,743
+JUZTEYMDFUNDDKCF,http://www.mystore.com/page52,836
+3PF7SKFAJ5B8BZXK,http://www.mystore.com/page28,1133
+E9KX2PIIJPCFLN51,http://www.mystore.com/page84,1004
+XMJWG8GUVWGAQHXF,http://www.mystore.com/page51,1078
+ME1CDPL56P9M8MJV,http://www.mystore.com/page66,794
+9VEO3EZLF5IJ20TO,http://www.mystore.com/page28,307
+SHJFDVMLRVQJIBQ3,http://www.mystore.com/page68,1022
+X7PNYKCL78CUG30S,http://www.mystore.com/page40,693
+A0HQSTVXY0XSHM9J,http://www.mystore.com/page14,235
+9XDQIVXUDIG24GLF,http://www.mystore.com/page69,144
+S0P1PUKVRKPOC8Q4,http://www.mystore.com/page94,433
+XIETLJLSH2YX2TEL,http://www.mystore.com/page48,1069
+CM0Z9SZ50GLX8WRH,http://www.mystore.com/page7,1130
+S3APORZ0W84RLAJW,http://www.mystore.com/page65,512
+OHX4T1P4MVJYTFWG,http://www.mystore.com/page16,950
+9VEO3EZLF5IJ20TO,http://www.mystore.com/page93,721
+LXWG5HTTHESJP6LR,http://www.mystore.com/page85,13
+[cloudera@quickstart Lab2.1]$ hdfs dfs -get test/data.txt /tmp/
+[cloudera@quickstart Lab2.1]$ cd /tmp
+[cloudera@quickstart tmp]$ ls
+077f98e2-c48c-4c31-918d-b8cb97c56640_resources  Jetty_0_0_0_0_50070_hdfs____w2cu08
+2a727923-1c39-4967-bd9c-61a56bf4b76d_resources  Jetty_0_0_0_0_50090_secondary____y6aanv
+34d1a93c-3380-4cb6-9427-715205ec489c_resources  Jetty_0_0_0_0_8042_node____19tj0x
+40074c7d-8205-49a8-bc3a-b49a85fd0e8d_resources  Jetty_0_0_0_0_8085_rest____nu924e
+575ac1b7-b805-433b-9eea-8eca9af7b314_resources  Jetty_0_0_0_0_8088_cluster____u0rgz3
+8f54a68a-d65b-4689-a847-f74566d8c223_resources  Jetty_0_0_0_0_8480_journal____.8g4awa
+a3a7935d-cb7f-4296-a15c-01e72116ba39_resources  Jetty_0_0_0_0_9095_thrift____.vqpz9l
+a9e66559-22c6-4ef4-856e-97e01a2d4ee2_resources  Jetty_localhost_36254_datanode____.7y1vv
+c6ba2b7d-6fd0-4603-9319-6880df42b3aa_resources  Jetty_localhost_37937_datanode____pypluo
+data.txt                                        Jetty_localhost_38056_datanode____.5n8gjx
+f8a46f83-422f-49c9-a5c1-37bde499e7b5_resources  Jetty_localhost_39831_datanode____d9cdav
+hadoop-unjar1331303928363845127                 Jetty_localhost_41942_datanode____.r5lwzj
+hadoop-unjar1799606771688206180                 Jetty_localhost_44961_datanode____6obh23
+hadoop-unjar2752700768418921661                 Jetty_localhost_53578_datanode____.xiwhi9
+hadoop-unjar2956381533904461419                 Jetty_localhost_60051_datanode____b8t6ex
+hadoop-unjar3343446268741886483                 keyring-67Cu87
+hadoop-unjar3624389695355469832                 keyring-BbQHli
+hadoop-unjar4446910928216271921                 keyring-fPXd9d
+hadoop-unjar4573507780615461210                 keyring-gMwudF
+hadoop-unjar4709823546031317870                 keyring-ILjXEd
+hadoop-unjar5068226729621225571                 keyring-K28a7q
+hadoop-unjar738822041148059134                  keyring-LFBwHs
+hadoop-unjar7486528369765898960                 keyring-lvP85c
+hadoop-unjar7612208843216419021                 keyring-lwF3fc
+hadoop-unjar7694751019173364492                 keyring-Pkbh72
+hive                                            keyring-QcIIrm
+hsperfdata_cloudera                             keyring-yTnPOn
+hsperfdata_hbase                                libnetty-transport-native-epoll1467352664732076233.so
+hsperfdata_hdfs                                 libnetty-transport-native-epoll252489262654299149.so
+hsperfdata_hive                                 libnetty-transport-native-epoll2660947763463893391.so
+hsperfdata_httpfs                               libnetty-transport-native-epoll297683209731861194.so
+hsperfdata_impala                               libnetty-transport-native-epoll3299342241812996397.so
+hsperfdata_mapred                               libnetty-transport-native-epoll3527147094792710037.so
+hsperfdata_oozie                                libnetty-transport-native-epoll3684265271591637298.so
+hsperfdata_root                                 libnetty-transport-native-epoll5417637402392595519.so
+hsperfdata_sentry                               libnetty-transport-native-epoll5955917814673311891.so
+hsperfdata_solr                                 libnetty-transport-native-epoll6084436262573460607.so
+hsperfdata_spark                                libnetty-transport-native-epoll6292470156997044893.so
+hsperfdata_sqoop2                               libnetty-transport-native-epoll7043949868890332122.so
+hsperfdata_yarn                                 libnetty-transport-native-epoll7360972077893235876.so
+hsperfdata_zookeeper                            libnetty-transport-native-epoll7509018590306362305.so
+impala-scratch                                  orbit-cloudera
+jetty-0.0.0.0-10002-hiveserver2-_-any-          pulse-SCJasptk77ie
+Jetty_0_0_0_0_19888_jobhistory____.djq1tw       vboxguest-Module.symvers
+[cloudera@quickstart tmp]$ ls data*
+data.txt
+[cloudera@quickstart tmp]$ ls *.txt
+data.txt
+[cloudera@quickstart tmp]$ hdfs dfs -get test/data.txt /tmp/
+get: `/tmp/data.txt': File exists
+[cloudera@quickstart tmp]$ hdfs dfs -ls -R test
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:55 test/test1
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart tmp]$ hdfs dfs -get test/data.txt /tmp/
+get: `/tmp/data.txt': File exists
+[cloudera@quickstart tmp]$ hdfs dfs -get /test/data.txt /tmp/
+get: `/test/data.txt': No such file or directory
+[cloudera@quickstart tmp]$ hdfs dfs -get test/data.txt /tmp/
+get: `/tmp/data.txt': File exists
+[cloudera@quickstart tmp]$ hdfs dfs -get te2313st/data.txt /tmp/
+get: `te2313st/data.txt': No such file or directory
+[cloudera@quickstart tmp]$ hdfs dfs -ls test/
+Found 3 items
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:55 test/test1
+[cloudera@quickstart tmp]$ hdfs dfs -get test/data.txt /tmp/
+get: `/tmp/data.txt': File exists
+[cloudera@quickstart tmp]$ ls -lh data.txt
+-rw-r--r-- 1 cloudera cloudera 1.5M Oct 31 23:56 data.txt
+[cloudera@quickstart tmp]$ rm data.txt 
+rm: remove regular file `data.txt'? y
+[cloudera@quickstart tmp]$ hdfs dfs -get test/data.txt /tmp/
+[cloudera@quickstart tmp]$ hdfs dfs -get test/data.txt /tmp/
+get: `/tmp/data.txt': File exists
+[cloudera@quickstart tmp]$ ls /
+bin  boot  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  sbin  selinux  srv  sys  tmp  usr  var
+[cloudera@quickstart tmp]$ ls /root
+ls: cannot open directory /root: Permission denied
+[cloudera@quickstart tmp]$ sudo ls /root
+anaconda-ks.cfg  hue.json  install.log	install.log.syslog  root
+[cloudera@quickstart tmp]$ hdfs dfs -ls
+Found 2 items
+-rw-r--r--   1 cloudera cloudera    3613198 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:49 test
+[cloudera@quickstart tmp]$ hdfs dfs -ls -R
+-rw-r--r--   1 cloudera cloudera    3613198 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:49 test
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:55 test/test1
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart tmp]$ ls -lh
+total 2.9M
+drwx------  2 hive      hive      4.0K Oct 30 20:35 077f98e2-c48c-4c31-918d-b8cb97c56640_resources
+drwx------  2 hive      hive      4.0K Oct 28 01:37 2a727923-1c39-4967-bd9c-61a56bf4b76d_resources
+drwx------  2 hive      hive      4.0K Oct 28 00:37 34d1a93c-3380-4cb6-9427-715205ec489c_resources
+drwx------  2 hive      hive      4.0K Oct 30 00:27 40074c7d-8205-49a8-bc3a-b49a85fd0e8d_resources
+drwx------  2 hive      hive      4.0K Oct 27 22:31 575ac1b7-b805-433b-9eea-8eca9af7b314_resources
+drwx------  2 hive      hive      4.0K Oct 28 01:43 8f54a68a-d65b-4689-a847-f74566d8c223_resources
+drwx------  2 hive      hive      4.0K Oct 30 20:34 a3a7935d-cb7f-4296-a15c-01e72116ba39_resources
+drwx------  2 hive      hive      4.0K Oct 30 00:08 a9e66559-22c6-4ef4-856e-97e01a2d4ee2_resources
+drwx------  2 hive      hive      4.0K Oct 29 21:31 c6ba2b7d-6fd0-4603-9319-6880df42b3aa_resources
+-rw-r--r--  1 cloudera  cloudera  1.5M Nov  1 00:02 data.txt
+drwx------  2 hive      hive      4.0K Oct 30 00:07 f8a46f83-422f-49c9-a5c1-37bde499e7b5_resources
+drwxr-xr-x  5 hive      hive      4.0K Oct 28 01:37 hadoop-unjar1331303928363845127
+drwxr-xr-x  5 hive      hive      4.0K Oct 30 20:33 hadoop-unjar1799606771688206180
+drwxr-xr-x  5 hive      hive      4.0K Oct 28 01:43 hadoop-unjar2752700768418921661
+drwxr-xr-x  5 hive      hive      4.0K Oct 28 01:42 hadoop-unjar2956381533904461419
+drwxr-xr-x  5 hive      hive      4.0K Oct 28 00:37 hadoop-unjar3343446268741886483
+drwxr-xr-x  5 hive      hive      4.0K Oct 29 21:31 hadoop-unjar3624389695355469832
+drwxr-xr-x  5 hive      hive      4.0K Oct 28 01:37 hadoop-unjar4446910928216271921
+drwxr-xr-x  5 hive      hive      4.0K Oct 30 20:33 hadoop-unjar4573507780615461210
+drwxr-xr-x  5 hive      hive      4.0K Oct 27 22:31 hadoop-unjar4709823546031317870
+drwxr-xr-x  5 hive      hive      4.0K Oct 28 00:37 hadoop-unjar5068226729621225571
+drwxr-xr-x  5 hive      hive      4.0K Oct 30 00:07 hadoop-unjar738822041148059134
+drwxr-xr-x  5 hive      hive      4.0K Oct 29 21:31 hadoop-unjar7486528369765898960
+drwxr-xr-x  5 hive      hive      4.0K Oct 30 00:07 hadoop-unjar7612208843216419021
+drwxr-xr-x  5 hive      hive      4.0K Oct 27 22:31 hadoop-unjar7694751019173364492
+drwx------ 12 hive      hive      4.0K Oct 30 20:35 hive
+drwxr-xr-x  2 cloudera  cloudera  4.0K Nov  1 00:07 hsperfdata_cloudera
+drwxr-xr-x  2 hbase     hbase     4.0K Oct 30 20:36 hsperfdata_hbase
+drwxr-xr-x  2 hdfs      hdfs      4.0K Oct 30 20:33 hsperfdata_hdfs
+drwxr-xr-x  2 hive      hive      4.0K Oct 30 20:33 hsperfdata_hive
+drwxr-xr-x  2 httpfs    httpfs    4.0K Oct 30 20:33 hsperfdata_httpfs
+drwxr-xr-x  2 impala    impala    4.0K Oct 30 20:34 hsperfdata_impala
+drwxr-xr-x  2 mapred    mapred    4.0K Oct 30 20:33 hsperfdata_mapred
+drwxr-xr-x  2 oozie     oozie     4.0K Oct 30 20:34 hsperfdata_oozie
+drwxr-xr-x  2 root      root      4.0K Oct 31 02:35 hsperfdata_root
+drwxr-xr-x  2 sentry    sentry    4.0K Oct 30 20:33 hsperfdata_sentry
+drwxr-xr-x  2 solr      solr      4.0K Oct 30 20:34 hsperfdata_solr
+drwxr-xr-x  2 spark     spark     4.0K Oct 30 20:33 hsperfdata_spark
+drwxr-xr-x  2 sqoop2    sqoop     4.0K Oct 30 20:33 hsperfdata_sqoop2
+drwxr-xr-x  2 yarn      yarn      4.0K Oct 30 20:33 hsperfdata_yarn
+drwxr-xr-x  2 zookeeper zookeeper 4.0K Oct 30 20:32 hsperfdata_zookeeper
+drwxr-xr-x  2 impala    impala    4.0K Oct 30 20:34 impala-scratch
+drwxr-xr-x  5 hive      hive      4.0K Oct 30 20:35 jetty-0.0.0.0-10002-hiveserver2-_-any-
+drwxr-xr-x  5 mapred    mapred    4.0K Oct 30 20:33 Jetty_0_0_0_0_19888_jobhistory____.djq1tw
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 30 20:33 Jetty_0_0_0_0_50070_hdfs____w2cu08
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 30 20:33 Jetty_0_0_0_0_50090_secondary____y6aanv
+drwxr-xr-x  5 yarn      yarn      4.0K Oct 30 20:33 Jetty_0_0_0_0_8042_node____19tj0x
+drwxr-xr-x  4 hbase     hbase     4.0K Oct 30 20:33 Jetty_0_0_0_0_8085_rest____nu924e
+drwxr-xr-x  5 yarn      yarn      4.0K Oct 30 20:33 Jetty_0_0_0_0_8088_cluster____u0rgz3
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 30 20:32 Jetty_0_0_0_0_8480_journal____.8g4awa
+drwxr-xr-x  4 hbase     hbase     4.0K Oct 30 20:33 Jetty_0_0_0_0_9095_thrift____.vqpz9l
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 28 01:41 Jetty_localhost_36254_datanode____.7y1vv
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 30 00:06 Jetty_localhost_37937_datanode____pypluo
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 30 20:32 Jetty_localhost_38056_datanode____.5n8gjx
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 29 21:30 Jetty_localhost_39831_datanode____d9cdav
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 28 00:36 Jetty_localhost_41942_datanode____.r5lwzj
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 30 00:26 Jetty_localhost_44961_datanode____6obh23
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 28 01:36 Jetty_localhost_53578_datanode____.xiwhi9
+drwxr-xr-x  4 hdfs      hdfs      4.0K Oct 27 22:30 Jetty_localhost_60051_datanode____b8t6ex
+drwx------  2 cloudera  cloudera  4.0K Oct 29 21:31 keyring-67Cu87
+drwx------  2 cloudera  cloudera  4.0K Oct 30 00:08 keyring-BbQHli
+drwx------  2 cloudera  cloudera  4.0K Feb 11  2023 keyring-fPXd9d
+drwx------  2 cloudera  cloudera  4.0K Oct 28 01:43 keyring-gMwudF
+drwx------  2 cloudera  cloudera  4.0K Oct 28 01:38 keyring-ILjXEd
+drwx------  2 cloudera  cloudera  4.0K Feb 11  2023 keyring-K28a7q
+drwx------  2 cloudera  cloudera  4.0K Feb 11  2023 keyring-LFBwHs
+drwx------  2 cloudera  cloudera  4.0K Feb 11  2023 keyring-lvP85c
+drwx------  2 cloudera  cloudera  4.0K Feb 11  2023 keyring-lwF3fc
+drwx------  2 cloudera  cloudera  4.0K Oct 30 20:34 keyring-Pkbh72
+drwx------  2 cloudera  cloudera  4.0K Oct 27 22:31 keyring-QcIIrm
+drwx------  2 cloudera  cloudera  4.0K Oct 28 00:37 keyring-yTnPOn
+-rw-r--r--  1 hive      hive      102K Oct 30 00:07 libnetty-transport-native-epoll1467352664732076233.so
+-rw-r--r--  1 hive      hive      102K Oct 28 01:43 libnetty-transport-native-epoll252489262654299149.so
+-rw-r--r--  1 spark     spark      56K Oct 27 22:31 libnetty-transport-native-epoll2660947763463893391.so
+-rw-r--r--  1 hive      hive      102K Oct 28 00:37 libnetty-transport-native-epoll297683209731861194.so
+-rw-r--r--  1 hive      hive      102K Oct 29 21:31 libnetty-transport-native-epoll3299342241812996397.so
+-rw-r--r--  1 spark     spark      56K Oct 28 01:37 libnetty-transport-native-epoll3527147094792710037.so
+-rw-r--r--  1 hive      hive      102K Oct 28 01:37 libnetty-transport-native-epoll3684265271591637298.so
+-rw-r--r--  1 hive      hive      102K Oct 27 22:31 libnetty-transport-native-epoll5417637402392595519.so
+-rw-r--r--  1 spark     spark      56K Oct 30 00:07 libnetty-transport-native-epoll5955917814673311891.so
+-rw-r--r--  1 spark     spark      56K Oct 28 01:43 libnetty-transport-native-epoll6084436262573460607.so
+-rw-r--r--  1 spark     spark      56K Oct 29 21:31 libnetty-transport-native-epoll6292470156997044893.so
+-rw-r--r--  1 spark     spark      56K Oct 28 00:37 libnetty-transport-native-epoll7043949868890332122.so
+-rw-r--r--  1 hive      hive      102K Oct 30 20:34 libnetty-transport-native-epoll7360972077893235876.so
+-rw-r--r--  1 spark     spark      56K Oct 30 20:34 libnetty-transport-native-epoll7509018590306362305.so
+drwx------  2 cloudera  cloudera  4.0K Oct 31 23:25 orbit-cloudera
+drwx------  2 cloudera  cloudera  4.0K Oct 30 20:34 pulse-SCJasptk77ie
+-rw-r--r--  1 root      root       28K Oct 27 22:34 vboxguest-Module.symvers
+[cloudera@quickstart tmp]$ hdfs dfs -ls -lhR
+-ls: Illegal option -lhR
+Usage: hadoop fs [generic options] -ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [<path> ...]
+[cloudera@quickstart tmp]$ hdfs dfs -ls -lh
+-ls: Illegal option -lh
+Usage: hadoop fs [generic options] -ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [<path> ...]
+[cloudera@quickstart tmp]$ hdfs dfs -ls -h
+Found 2 items
+-rw-r--r--   1 cloudera cloudera      3.4 M 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:49 test
+[cloudera@quickstart tmp]$ hdfs dfs -ls -hR
+-ls: Illegal option -hR
+Usage: hadoop fs [generic options] -ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [<path> ...]
+[cloudera@quickstart tmp]$ hdfs dfs -ls -h -R
+-rw-r--r--   1 cloudera cloudera      3.4 M 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:49 test
+-rw-r--r--   1 cloudera cloudera      1.5 M 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera      1.3 K 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:55 test/test1
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart tmp]$ hdfs dfs -getmerge test /tmp/merg.txt
+[cloudera@quickstart tmp]$ ls -lh merg.txt
+-rw-r--r-- 1 cloudera cloudera 1.5M Nov  1 00:10 merg.txt
+[cloudera@quickstart tmp]$ hdfs dfs -ls -R
+-rw-r--r--   1 cloudera cloudera    3613198 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:49 test
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:55 test/test1
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart tmp]$ ls -l merg.txt
+-rw-r--r-- 1 cloudera cloudera 1530705 Nov  1 00:10 merg.txt
+[cloudera@quickstart tmp]$ hdfs dfs -put ~/hdp/pigandhive/labs/demo/stocks.csv 
+077f98e2-c48c-4c31-918d-b8cb97c56640_resources/        Jetty_0_0_0_0_50090_secondary____y6aanv/
+2a727923-1c39-4967-bd9c-61a56bf4b76d_resources/        Jetty_0_0_0_0_8042_node____19tj0x/
+34d1a93c-3380-4cb6-9427-715205ec489c_resources/        Jetty_0_0_0_0_8085_rest____nu924e/
+40074c7d-8205-49a8-bc3a-b49a85fd0e8d_resources/        Jetty_0_0_0_0_8088_cluster____u0rgz3/
+575ac1b7-b805-433b-9eea-8eca9af7b314_resources/        Jetty_0_0_0_0_8480_journal____.8g4awa/
+8f54a68a-d65b-4689-a847-f74566d8c223_resources/        Jetty_0_0_0_0_9095_thrift____.vqpz9l/
+a3a7935d-cb7f-4296-a15c-01e72116ba39_resources/        Jetty_localhost_36254_datanode____.7y1vv/
+a9e66559-22c6-4ef4-856e-97e01a2d4ee2_resources/        Jetty_localhost_37937_datanode____pypluo/
+c6ba2b7d-6fd0-4603-9319-6880df42b3aa_resources/        Jetty_localhost_38056_datanode____.5n8gjx/
+data.txt                                               Jetty_localhost_39831_datanode____d9cdav/
+.esd-501/                                              Jetty_localhost_41942_datanode____.r5lwzj/
+f8a46f83-422f-49c9-a5c1-37bde499e7b5_resources/        Jetty_localhost_44961_datanode____6obh23/
+hadoop-unjar1331303928363845127/                       Jetty_localhost_53578_datanode____.xiwhi9/
+hadoop-unjar1799606771688206180/                       Jetty_localhost_60051_datanode____b8t6ex/
+hadoop-unjar2752700768418921661/                       keyring-67Cu87/
+hadoop-unjar2956381533904461419/                       keyring-BbQHli/
+hadoop-unjar3343446268741886483/                       keyring-fPXd9d/
+hadoop-unjar3624389695355469832/                       keyring-gMwudF/
+hadoop-unjar4446910928216271921/                       keyring-ILjXEd/
+hadoop-unjar4573507780615461210/                       keyring-K28a7q/
+hadoop-unjar4709823546031317870/                       keyring-LFBwHs/
+hadoop-unjar5068226729621225571/                       keyring-lvP85c/
+hadoop-unjar738822041148059134/                        keyring-lwF3fc/
+hadoop-unjar7486528369765898960/                       keyring-Pkbh72/
+hadoop-unjar7612208843216419021/                       keyring-QcIIrm/
+hadoop-unjar7694751019173364492/                       keyring-yTnPOn/
+hive/                                                  libnetty-transport-native-epoll1467352664732076233.so
+hsperfdata_cloudera/                                   libnetty-transport-native-epoll252489262654299149.so
+hsperfdata_hbase/                                      libnetty-transport-native-epoll2660947763463893391.so
+hsperfdata_hdfs/                                       libnetty-transport-native-epoll297683209731861194.so
+hsperfdata_hive/                                       libnetty-transport-native-epoll3299342241812996397.so
+hsperfdata_httpfs/                                     libnetty-transport-native-epoll3527147094792710037.so
+hsperfdata_impala/                                     libnetty-transport-native-epoll3684265271591637298.so
+hsperfdata_mapred/                                     libnetty-transport-native-epoll5417637402392595519.so
+hsperfdata_oozie/                                      libnetty-transport-native-epoll5955917814673311891.so
+hsperfdata_root/                                       libnetty-transport-native-epoll6084436262573460607.so
+hsperfdata_sentry/                                     libnetty-transport-native-epoll6292470156997044893.so
+hsperfdata_solr/                                       libnetty-transport-native-epoll7043949868890332122.so
+hsperfdata_spark/                                      libnetty-transport-native-epoll7360972077893235876.so
+hsperfdata_sqoop2/                                     libnetty-transport-native-epoll7509018590306362305.so
+hsperfdata_yarn/                                       merg.txt
+hsperfdata_zookeeper/                                  .merg.txt.crc
+.hue-python-eggs/                                      orbit-cloudera/
+.ICE-unix/                                             pulse-SCJasptk77ie/
+impala-scratch/                                        vboxguest-Module.symvers
+jetty-0.0.0.0-10002-hiveserver2-_-any-/                .X0-lock
+Jetty_0_0_0_0_19888_jobhistory____.djq1tw/             .X11-unix/
+Jetty_0_0_0_0_50070_hdfs____w2cu08/                    
+[cloudera@quickstart tmp]$ hdfs dfs -put ~/hdp/pigandhive/labs/demo/stocks.csv 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+put: `stocks.csv': File exists
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ 
+[cloudera@quickstart tmp]$ hdfs dfs -D dfs.blocksize=104876 -put ~/hdp/pigandhive/labs/Lab2.1/data.txt  data.txt
+put: Specified block size is less than configured minimum value (dfs.namenode.fs-limits.min-block-size): 104876 < 1048576
+[cloudera@quickstart tmp]$ hdfs dfs -D dfs.blocksize=10487 -put ~/hdp/pigandhive/labs/Lab2.1/data.txt  data.txt
+put: Specified block size is less than configured minimum value (dfs.namenode.fs-limits.min-block-size): 10487 < 1048576
+[cloudera@quickstart tmp]$ hdfs dfs -D dfs.blocksize=104877 -put ~/hdp/pigandhive/labs/Lab2.1/data.txt  data.txt
+put: Specified block size is less than configured minimum value (dfs.namenode.fs-limits.min-block-size): 104877 < 1048576
+[cloudera@quickstart tmp]$ hdfs dfs -D dfs.blocksize=1048777 -put ~/hdp/pigandhive/labs/Lab2.1/data.txt  data.txt
+-put: Invalid values: dfs.bytes-per-checksum (=512) must divide block size (=1048777).
+Usage: hadoop fs [generic options] -put [-f] [-p] [-l] <localsrc> ... <dst>
+[cloudera@quickstart tmp]$ hdfs dfs -D dfs.blocksize=1048576 -put ~/hdp/pigandhive/labs/Lab2.1/data.txt  data.txt
+[cloudera@quickstart tmp]$ hdsf fsck test/data.txt
+bash: hdsf: command not found
+[cloudera@quickstart tmp]$ hdfs fsck test/data.txt
+Connecting to namenode via http://quickstart.cloudera:50070/fsck?ugi=cloudera&path=test%2Fdata.txt
+FSCK started by cloudera (auth:SIMPLE) from /10.0.2.15 for path test/data.txt at Wed Nov 01 00:17:37 PDT 2023
+FSCK ended at Wed Nov 01 00:17:37 PDT 2023 in 1 milliseconds
+Invalid path name Invalid file name: test/data.txt
+
+
+Fsck on path 'test/data.txt' FAILED
+[cloudera@quickstart tmp]$ hdfs fsck /
+Connecting to namenode via http://quickstart.cloudera:50070/fsck?ugi=cloudera&path=%2F
+FSCK started by cloudera (auth:SIMPLE) from /10.0.2.15 for path / at Wed Nov 01 00:17:52 PDT 2023
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+............................................Status: HEALTHY
+ Total size:	867974010 B
+ Total dirs:	124
+ Total files:	944
+ Total symlinks:		0
+ Total blocks (validated):	946 (avg. block size 917520 B)
+ Minimally replicated blocks:	946 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+ Number of data-nodes:		1
+ Number of racks:		1
+FSCK ended at Wed Nov 01 00:17:52 PDT 2023 in 152 milliseconds
+
+
+The filesystem under path '/' is HEALTHY
+[cloudera@quickstart tmp]$ hdfs fsck /user/root/data.txt
+Connecting to namenode via http://quickstart.cloudera:50070/fsck?ugi=cloudera&path=%2Fuser%2Froot%2Fdata.txt
+FSCK started by cloudera (auth:SIMPLE) from /10.0.2.15 for path /user/root/data.txt at Wed Nov 01 00:18:13 PDT 2023
+
+
+Path '/user/root/data.txt' does not exist
+[cloudera@quickstart tmp]$ hdfs dfs -ls /
+Found 6 items
+drwxrwxrwx   - hdfs  supergroup          0 2017-10-23 09:15 /benchmarks
+drwxr-xr-x   - hbase supergroup          0 2023-10-30 20:33 /hbase
+drwxr-xr-x   - solr  solr                0 2017-10-23 09:18 /solr
+drwxrwxrwt   - hdfs  supergroup          0 2023-02-11 01:49 /tmp
+drwxr-xr-x   - hdfs  supergroup          0 2017-10-23 09:17 /user
+drwxr-xr-x   - hdfs  supergroup          0 2017-10-23 09:17 /var
+[cloudera@quickstart tmp]$ hdfs dfs -ls /user
+Found 8 items
+drwxr-xr-x   - cloudera cloudera            0 2023-11-01 00:16 /user/cloudera
+drwxr-xr-x   - mapred   hadoop              0 2017-10-23 09:15 /user/history
+drwxrwxrwx   - hive     supergroup          0 2017-10-23 09:17 /user/hive
+drwxrwxrwx   - hue      supergroup          0 2017-10-23 09:16 /user/hue
+drwxrwxrwx   - jenkins  supergroup          0 2017-10-23 09:15 /user/jenkins
+drwxrwxrwx   - oozie    supergroup          0 2017-10-23 09:16 /user/oozie
+drwxrwxrwx   - root     supergroup          0 2017-10-23 09:16 /user/root
+drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /user/spark
+[cloudera@quickstart tmp]$ hdfs dfs -ls /user/root
+[cloudera@quickstart tmp]$ hdfs dfs -ls /user/cloudera
+Found 3 items
+-rw-r--r--   1 cloudera cloudera    1529355 2023-11-01 00:16 /user/cloudera/data.txt
+-rw-r--r--   1 cloudera cloudera    3613198 2023-10-31 03:51 /user/cloudera/stocks.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:49 /user/cloudera/test
+[cloudera@quickstart tmp]$ hdfs fsck /user/cloudera/data.txt
+Connecting to namenode via http://quickstart.cloudera:50070/fsck?ugi=cloudera&path=%2Fuser%2Fcloudera%2Fdata.txt
+FSCK started by cloudera (auth:SIMPLE) from /10.0.2.15 for path /user/cloudera/data.txt at Wed Nov 01 00:19:32 PDT 2023
+.Status: HEALTHY
+ Total size:	1529355 B
+ Total dirs:	0
+ Total files:	1
+ Total symlinks:		0
+ Total blocks (validated):	2 (avg. block size 764677 B)
+ Minimally replicated blocks:	2 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+ Number of data-nodes:		1
+ Number of racks:		1
+FSCK ended at Wed Nov 01 00:19:32 PDT 2023 in 1 milliseconds
+
+
+The filesystem under path '/user/cloudera/data.txt' is HEALTHY
+[cloudera@quickstart tmp]$ hdfs fsck /user/cloudera/test/date.txt
+Connecting to namenode via http://quickstart.cloudera:50070/fsck?ugi=cloudera&path=%2Fuser%2Fcloudera%2Ftest%2Fdate.txt
+FSCK started by cloudera (auth:SIMPLE) from /10.0.2.15 for path /user/cloudera/test/date.txt at Wed Nov 01 00:20:00 PDT 2023
+
+
+Path '/user/cloudera/test/date.txt' does not exist
+[cloudera@quickstart tmp]$ hdfs dfs -ls /user/cloudera/test
+Found 3 items
+-rw-r--r--   1 cloudera cloudera    1529355 2023-10-31 23:49 /user/cloudera/test/data.txt
+-rw-r--r--   1 cloudera cloudera       1350 2023-10-31 23:49 /user/cloudera/test/small_blocks.txt
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:55 /user/cloudera/test/test1
+[cloudera@quickstart tmp]$ hdfs fsck /user/cloudera/test/data.txt
+Connecting to namenode via http://quickstart.cloudera:50070/fsck?ugi=cloudera&path=%2Fuser%2Fcloudera%2Ftest%2Fdata.txt
+FSCK started by cloudera (auth:SIMPLE) from /10.0.2.15 for path /user/cloudera/test/data.txt at Wed Nov 01 00:20:56 PDT 2023
+.Status: HEALTHY
+ Total size:	1529355 B
+ Total dirs:	0
+ Total files:	1
+ Total symlinks:		0
+ Total blocks (validated):	1 (avg. block size 1529355 B)
+ Minimally replicated blocks:	1 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+ Number of data-nodes:		1
+ Number of racks:		1
+FSCK ended at Wed Nov 01 00:20:56 PDT 2023 in 1 milliseconds
+
+
+The filesystem under path '/user/cloudera/test/data.txt' is HEALTHY
+[cloudera@quickstart tmp]$ 

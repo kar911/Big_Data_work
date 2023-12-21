@@ -1,0 +1,692 @@
+java.io.FileNotFoundException: org/apache/hadoop (No such file or directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:215)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:145)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:116)
+	at sun.tools.jar.Main.list(Main.java:1004)
+	at sun.tools.jar.Main.run(Main.java:245)
+	at sun.tools.jar.Main.main(Main.java:1177)
+[cloudera@quickstart hadoop-mapreduce]$ jar -tf  org/apache/hadoop/mapreduce/
+java.io.FileNotFoundException: org/apache/hadoop/mapreduce (No such file or directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:215)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:145)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:116)
+	at sun.tools.jar.Main.list(Main.java:1004)
+	at sun.tools.jar.Main.run(Main.java:245)
+	at sun.tools.jar.Main.main(Main.java:1177)
+[cloudera@quickstart hadoop-mapreduce]$ jar -tf  org/apache/hadoop/examples/
+java.io.FileNotFoundException: org/apache/hadoop/examples (No such file or directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:215)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:145)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:116)
+	at sun.tools.jar.Main.list(Main.java:1004)
+	at sun.tools.jar.Main.run(Main.java:245)
+	at sun.tools.jar.Main.main(Main.java:1177)
+[cloudera@quickstart hadoop-mapreduce]$ jar -tf  org/apache/hadoop/examples
+java.io.FileNotFoundException: org/apache/hadoop/examples (No such file or directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:215)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:145)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:116)
+	at sun.tools.jar.Main.list(Main.java:1004)
+	at sun.tools.jar.Main.run(Main.java:245)
+	at sun.tools.jar.Main.main(Main.java:1177)
+[cloudera@quickstart hadoop-mapreduce]$ jar -tf  org/apache/hadoop
+java.io.FileNotFoundException: org/apache/hadoop (No such file or directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:215)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:145)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:116)
+	at sun.tools.jar.Main.list(Main.java:1004)
+	at sun.tools.jar.Main.run(Main.java:245)
+	at sun.tools.jar.Main.main(Main.java:1177)
+[cloudera@quickstart hadoop-mapreduce]$ cd ~
+[cloudera@quickstart ~]$ date +%d
+06
+[cloudera@quickstart ~]$ date +%d ; date
+06
+Mon Nov  6 09:18:41 IST 2023
+[cloudera@quickstart ~]$ date +%d & date
+[2] 2574
+06
+Mon Nov  6 09:19:59 IST 2023
+[2]-  Done                    date +%d
+[cloudera@quickstart ~]$ date +%d && date
+06
+Mon Nov  6 09:20:08 IST 2023
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cut -d'' -I > today.txt
+cut: the delimiter must be a single character
+Try `cut --help' for more information.
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cut -d'' -F > today.txt
+cut: the delimiter must be a single character
+Try `cut --help' for more information.
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cut -d'' -f > today.txt
+cut: the delimiter must be a single character
+Try `cut --help' for more information.
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cut -d'' -fi > today.txt
+cut: the delimiter must be a single character
+Try `cut --help' for more information.
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cat -d'' -fi > today.txt
+cat: invalid option -- 'd'
+Try `cat --help' for more information.
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cat -d' ' -fi > today.txt
+cat: invalid option -- 'd'
+Try `cat --help' for more information.
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cat -d' ' -f > today.txt
+cat: invalid option -- 'd'
+Try `cat --help' for more information.
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cat -d' ' -I > today.txt
+cat: invalid option -- 'd'
+Try `cat --help' for more information.
+[cloudera@quickstart ~]$ man date 
+[cloudera@quickstart ~]$ 
+[cloudera@quickstart ~]$ man cut
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cat -d' ' -f > today.txt
+cat: invalid option -- 'd'
+Try `cat --help' for more information.
+[cloudera@quickstart ~]$ man tee
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cat -d' ' -i > today.txt
+cat: invalid option -- 'd'
+Try `cat --help' for more information.
+[cloudera@quickstart ~]$ man tee
+[cloudera@quickstart ~]$ date | tee fulldate.txt | cat -a' ' -i > today.txt
+cat: invalid option -- 'a'
+Try `cat --help' for more information.
+[cloudera@quickstart ~]$ date | cut
+cut: you must specify a list of bytes, characters, or fields
+Try `cut --help' for more information.
+[cloudera@quickstart ~]$ date | cut -d'' -I > today.txt
+cut: the delimiter must be a single character
+Try `cut --help' for more information.
+[cloudera@quickstart ~]$ date | cut -d' ' -1 > today.txt
+cut: invalid option -- '1'
+Try `cut --help' for more information.
+[cloudera@quickstart ~]$ date | cut -d' ' -f1 > today.txt
+[cloudera@quickstart ~]$ cat today.txt 
+Mon
+[cloudera@quickstart ~]$ man cut
+[cloudera@quickstart ~]$ date
+Mon Nov  6 09:45:33 IST 2023
+[cloudera@quickstart ~]$ maN XARGS
+bash: maN: command not found
+[cloudera@quickstart ~]$ maN xargs
+bash: maN: command not found
+[cloudera@quickstart ~]$ man xargs
+[cloudera@quickstart ~]$ echo '12 2017' | cal
+    November 2023   
+Su Mo Tu We Th Fr Sa
+          1  2  3  4
+ 5  6  7  8  9 10 11
+12 13 14 15 16 17 18
+19 20 21 22 23 24 25
+26 27 28 29 30
+
+[cloudera@quickstart ~]$ echo '12 2017' | cal {} {}
+cal: illegal month value: use 1-12
+[cloudera@quickstart ~]$ cal -A 1  -B 1 12 2017
+cal: invalid option -- 'A'
+usage: cal [-13smjyV] [[[day] month] year]
+[cloudera@quickstart ~]$ cal --A 1  --B 1 12 2017
+cal: invalid option -- '-'
+usage: cal [-13smjyV] [[[day] month] year]
+[cloudera@quickstart ~]$ man cal
+[cloudera@quickstart ~]$ ls
+automate.sh       Desktop    enterprise-deployment.json  kerberos  newfile   shared     utk
+cd                Documents  express-deployment.json     lib       parcels   Templates  Videos
+cloudera-manager  Downloads  fulldate.txt                Music     Pictures  test.txt   workspace
+cm_api.py         eclipse    hdp                         new       Public    today.txt
+[cloudera@quickstart ~]$ rm fulldate.txt 
+rm: remove regular file `fulldate.txt'? y
+[cloudera@quickstart ~]$ rm today.txt 
+rm: remove regular file `today.txt'? y
+[cloudera@quickstart ~]$ cat new
+/proc/sys/fs
+/proc/fs
+/lib/modules/2.6.32-573.el6.x86_64/kernel/fs
+/var/lib/hadoop-httpfs/tomcat-deployment/webapps/webhdfs/WEB-INF/classes/org/apache/hadoop/fs
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/api/org/apache/hadoop/fs
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/api/src-html/org/apache/hadoop/fs
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/hadoop-hdfs-httpfs/apidocs/org/apache/hadoop/fs
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/hadoop-hdfs-httpfs/apidocs/src-html/org/apache/hadoop/fs
+/usr/lib/hue/desktop/libs/hadoop/src/hadoop/fs
+/usr/lib/hue/desktop/core/src/desktop/lib/fs
+/usr/lib/hue/apps/oozie/examples/unmanaged/fs
+/usr/lib/hue/apps/oozie/examples/managed/fs
+/usr/lib/hadoop-httpfs/webapps/webhdfs/WEB-INF/classes/org/apache/hadoop/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/ubifs/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/ext3/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/ext4/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/gfs2/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/btrfs/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/jffs2/fs
+/usr/src/kernels/2.6.32-573.el6.x86_64/include/config/ext2/fs
+/sys/fs
+[cloudera@quickstart ~]$ rm new
+rm: remove regular file `new'? y
+[cloudera@quickstart ~]$ cat newfile 
+Found 3 items
+-rw-r--r--   1 cloudera cloudera    1529355 2023-11-01 00:16 data.txt
+-rw-r--r--   1 cloudera cloudera    3613198 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-10-31 23:49 test
+[cloudera@quickstart ~]$ rm newfile 
+rm: remove regular file `newfile'? y
+[cloudera@quickstart ~]$ cd hdp/pigandhive/labs/
+dataingestion/    demo/             Lab2.1/           labday5_out.txt   small_blocks.txt  
+data.txt          Lab1.2/           Lab3.1/           new file~         this_doc.txt      
+[cloudera@quickstart ~]$ cd 
+automate.sh                       .gconfd/                          .pulse-cookie
+.bash_history                     .gnome2/                          shared/
+.bash_logout                      .gnome2_private/                  Templates/
+.bash_profile                     .gstreamer-0.10/                  test.txt
+.bashrc                           .gtk-bookmarks                    .themes/
+.cache/                           .gvfs/                            .thumbnails/
+cd                                hdp/                              utk/
+cloudera-manager                  .ICEauthority                     .vboxclient-clipboard.pid
+cm_api.py                         .icons/                           .vboxclient-display.pid
+.config/                          kerberos                          .vboxclient-display-svga-x11.pid
+.dbus/                            lib/                              .vboxclient-draganddrop.pid
+Desktop/                          .local/                           .vboxclient-seamless.pid
+Documents/                        .mozilla/                         .vboxclient-vmsvga-session.pid
+Downloads/                        Music/                            Videos/
+eclipse/                          .mysql_history                    .viminfo
+enterprise-deployment.json        .nautilus/                        workspace/
+.esd_auth                         parcels                           .xsession-errors
+express-deployment.json           Pictures/                         .xsession-errors.old
+.fontconfig/                      Public/                           
+.gconf/                           .pulse/                           
+[cloudera@quickstart ~]$ cd hdp/pigandhive/labs/
+[cloudera@quickstart labs]$ 
+Display all 2010 possibilities? (y or n)
+[cloudera@quickstart labs]$ ls
+dataingestion  data.txt  demo  Lab1.2  Lab2.1  Lab3.1  labday5_out.txt  new file~  small_blocks.txt  this_doc.txt
+[cloudera@quickstart labs]$ mkdir wordcount
+[cloudera@quickstart labs]$ cd wordcount/
+[cloudera@quickstart wordcount]$ cp -r  ~/shared/wordcount .
+[cloudera@quickstart wordcount]$ ls
+wordcount
+[cloudera@quickstart wordcount]$ cd wordcount/
+[cloudera@quickstart wordcount]$ mv * ..
+mv: overwrite `../wordcount'? ^C
+[cloudera@quickstart wordcount]$ ls
+wordcount
+[cloudera@quickstart wordcount]$ ls wordcount/
+WordCountJob.java  WordCountMapper.java  WordCountReducer.java
+[cloudera@quickstart wordcount]$ cd wordcount/
+[cloudera@quickstart wordcount]$ pwd
+/home/cloudera/hdp/pigandhive/labs/wordcount/wordcount/wordcount
+[cloudera@quickstart wordcount]$ ls
+WordCountJob.java  WordCountMapper.java  WordCountReducer.java
+[cloudera@quickstart wordcount]$ mv * ../../
+[cloudera@quickstart wordcount]$ cd ../../
+[cloudera@quickstart wordcount]$ ls
+wordcount  WordCountJob.java  WordCountMapper.java  WordCountReducer.java
+[cloudera@quickstart wordcount]$ cd ..
+[cloudera@quickstart labs]$ cd -
+/home/cloudera/hdp/pigandhive/labs/wordcount
+[cloudera@quickstart wordcount]$ rm -r wordcount/
+rm: descend into directory `wordcount'? y
+rm: remove directory `wordcount/wordcount'? y
+rm: remove directory `wordcount'? y
+[cloudera@quickstart wordcount]$ ls
+WordCountJob.java  WordCountMapper.java  WordCountReducer.java
+[cloudera@quickstart wordcount]$ cd ..
+[cloudera@quickstart labs]$ cd -
+/home/cloudera/hdp/pigandhive/labs/wordcount
+[cloudera@quickstart wordcount]$ cd /home/cloudera/workspace/HDFS_API
+[cloudera@quickstart HDFS_API]$ ls -r
+src  bin
+[cloudera@quickstart HDFS_API]$ ls -R
+.:
+bin  src
+
+./bin:
+wordcount
+
+./bin/wordcount:
+WordCountJob.class  WordCountMapper.class  WordCountReducer.class
+
+./src:
+wordcount
+
+./src/wordcount:
+WordCountJob.java  WordCountMapper.java  WordCountReducer.java
+[cloudera@quickstart HDFS_API]$ which hdfs
+/usr/bin/hdfs
+[cloudera@quickstart HDFS_API]$ ls -Rls
+.:
+total 8
+4 drwxrwxr-x 3 cloudera cloudera 4096 Nov  6 10:54 bin
+4 drwxrwxr-x 3 cloudera cloudera 4096 Nov  6 10:54 src
+
+./bin:
+total 4
+4 drwxrwxr-x 2 cloudera cloudera 4096 Nov  6 10:54 wordcount
+
+./bin/wordcount:
+total 12
+4 -rw-rw-r-- 1 cloudera cloudera 2930 Nov  6 11:40 WordCountJob.class
+4 -rw-rw-r-- 1 cloudera cloudera 2470 Nov  6 10:54 WordCountMapper.class
+4 -rw-rw-r-- 1 cloudera cloudera 2318 Nov  6 10:54 WordCountReducer.class
+
+./src:
+total 4
+4 drwxrwxr-x 2 cloudera cloudera 4096 Nov  6 10:47 wordcount
+
+./src/wordcount:
+total 12
+4 -rw-rw-r-- 1 cloudera cloudera 1734 Nov  6 11:40 WordCountJob.java
+4 -rw-rw-r-- 1 cloudera cloudera  759 Nov  6 10:54 WordCountMapper.java
+4 -rw-rw-r-- 1 cloudera cloudera  597 Nov  6 10:54 WordCountReducer.java
+[cloudera@quickstart HDFS_API]$ cd ..
+[cloudera@quickstart workspace]$ cd ~/hdp/pigandhive/labs/wordcount/
+[cloudera@quickstart wordcount]$ ls
+Wordcount.jar  WordCountJob.java  WordCountMapper.java  WordCountReducer.java
+[cloudera@quickstart wordcount]$ hdfs dfs -ls
+Found 18 items
+-rw-r--r--   1 cloudera  cloudera      46138 2023-11-04 15:33 constitution.txt
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 14:53 counties
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 15:04 counties2
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 16:38 data
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-11-01 12:46 data.txt
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 16:39 dir1
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 09:17 dir2
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 10:55 salaries
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:07 salaries2
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:33 salaries3
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:30 salaries4
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:45 salaries5
+-rw-r--r--   1 cloudera  cloudera       1350 2023-11-03 16:47 small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera    3613198 2023-10-31 16:21 stocks.csv
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 10:24 tes1
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-01 12:19 test
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 15:36 wordcount_output
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 16:02 wordcount_output1
+[cloudera@quickstart wordcount]$ yarn jar Wordcount.jar wordcount.WordCountJob  constitution.txt  word_cnt_out
+23/11/06 12:06:44 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+23/11/06 12:06:45 INFO input.FileInputFormat: Total input paths to process : 1
+23/11/06 12:06:45 INFO mapreduce.JobSubmitter: number of splits:1
+23/11/06 12:06:45 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1699073844909_0016
+23/11/06 12:06:45 INFO impl.YarnClientImpl: Submitted application application_1699073844909_0016
+23/11/06 12:06:45 INFO mapreduce.Job: The url to track the job: http://quickstart.cloudera:8088/proxy/application_1699073844909_0016/
+23/11/06 12:06:45 INFO mapreduce.Job: Running job: job_1699073844909_0016
+23/11/06 12:06:51 INFO mapreduce.Job: Job job_1699073844909_0016 running in uber mode : false
+23/11/06 12:06:51 INFO mapreduce.Job:  map 0% reduce 0%
+23/11/06 12:06:56 INFO mapreduce.Job:  map 100% reduce 0%
+23/11/06 12:07:01 INFO mapreduce.Job:  map 100% reduce 100%
+23/11/06 12:07:01 INFO mapreduce.Job: Job job_1699073844909_0016 completed successfully
+23/11/06 12:07:01 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=90421
+		FILE: Number of bytes written=469197
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=46265
+		HDFS: Number of bytes written=17049
+		HDFS: Number of read operations=6
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=3335
+		Total time spent by all reduces in occupied slots (ms)=2361
+		Total time spent by all map tasks (ms)=3335
+		Total time spent by all reduce tasks (ms)=2361
+		Total vcore-milliseconds taken by all map tasks=3335
+		Total vcore-milliseconds taken by all reduce tasks=2361
+		Total megabyte-milliseconds taken by all map tasks=3415040
+		Total megabyte-milliseconds taken by all reduce tasks=2417664
+	Map-Reduce Framework
+		Map input records=649
+		Map output records=7623
+		Map output bytes=75169
+		Map output materialized bytes=90421
+		Input split bytes=127
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=1683
+		Reduce shuffle bytes=90421
+		Reduce input records=7623
+		Reduce output records=1683
+		Spilled Records=15246
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=101
+		CPU time spent (ms)=2010
+		Physical memory (bytes) snapshot=513642496
+		Virtual memory (bytes) snapshot=3156156416
+		Total committed heap usage (bytes)=570949632
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=46138
+	File Output Format Counters 
+		Bytes Written=17049
+[cloudera@quickstart wordcount]$ hdfs dfs -ls
+Found 19 items
+-rw-r--r--   1 cloudera  cloudera      46138 2023-11-04 15:33 constitution.txt
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 14:53 counties
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 15:04 counties2
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 16:38 data
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-11-01 12:46 data.txt
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 16:39 dir1
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 09:17 dir2
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 10:55 salaries
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:07 salaries2
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:33 salaries3
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:30 salaries4
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 12:45 salaries5
+-rw-r--r--   1 cloudera  cloudera       1350 2023-11-03 16:47 small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera    3613198 2023-10-31 16:21 stocks.csv
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 10:24 tes1
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-01 12:19 test
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-06 12:07 word_cnt_out
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 15:36 wordcount_output
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-04 16:02 wordcount_output1
+[cloudera@quickstart wordcount]$ hdfs dfs -ls word_cnt_out
+Found 2 items
+-rw-r--r--   1 cloudera cloudera          0 2023-11-06 12:07 word_cnt_out/_SUCCESS
+-rw-r--r--   1 cloudera cloudera      17049 2023-11-06 12:07 word_cnt_out/part-r-00000
+[cloudera@quickstart wordcount]$ hdfs dfs -cat word_cnt_out/part-r-00000 | more
+"I	1
+(Sundays	1
+(except	1
+(not	1
+(or	1
+(when	1
+-	13
+1	6
+1.	12
+10	2
+11	1
+12	1
+13	1
+14	1
+15	1
+15th	1
+16	1
+17	1
+18	1
+19	1
+2	6
+2.	12
+20	1
+20th	1
+21	1
+22	1
+23	1
+24	1
+25	1
+26	1
+27	1
+3	5
+3.	6
+3d	2
+4	4
+4.	4
+5	2
+5.	3
+6	2
+6.	2
+7	2
+7.	1
+8	2
+9	2
+A	3
+Ability,	1
+Abraham	1
+Account	1
+Act,	1
+Acting	3
+Acts,	2
+Adjournment	1
+Adjournment)	1
+Adjournment,	1
+Adoption	2
+Advice	2
+Affirmation,	1
+Affirmation.	1
+Affirmation:	1
+After	1
+Age	3
+Agreement	1
+Aid	1
+Alexander	1
+All	4
+Alliance,	1
+Ambassadors	1
+Ambassadors,	3
+Amendment	28
+Amendments	2
+Amendments,	1
+America	1
+America.	2
+And	6
+Application	2
+Appointment	2
+Appointments	2
+Appropriation	1
+Appropriations	1
+Armies,	1
+Arms,	1
+Army	1
+Arrest	1
+Arsenals,	1
+Article	10
+Article;	1
+Articles	1
+Arts,	1
+Assistance	1
+Attainder	2
+Attainder,	1
+Attendance	2
+Attest:	1
+Authority	6
+Authority;	1
+Authors	1
+Baldwin	1
+Ballot	3
+Bankruptcies	1
+Bassett,	1
+Bedford	1
+Before	1
+Behavior,	2
+Benjamin	1
+Bill	5
+Bill,	1
+Bill.	1
+Bills	1
+[cloudera@quickstart wordcount]$ 
+
+[cloudera@quickstart wordcount]$ yarn jar Wordcount1.jar wordcount.WordCountJob  constitution.txt  word_cnt_out1
+23/11/06 12:16:08 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+23/11/06 12:16:09 INFO input.FileInputFormat: Total input paths to process : 1
+23/11/06 12:16:09 INFO mapreduce.JobSubmitter: number of splits:1
+23/11/06 12:16:09 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1699073844909_0017
+23/11/06 12:16:09 INFO impl.YarnClientImpl: Submitted application application_1699073844909_0017
+23/11/06 12:16:09 INFO mapreduce.Job: The url to track the job: http://quickstart.cloudera:8088/proxy/application_1699073844909_0017/
+23/11/06 12:16:09 INFO mapreduce.Job: Running job: job_1699073844909_0017
+23/11/06 12:16:14 INFO mapreduce.Job: Job job_1699073844909_0017 running in uber mode : false
+23/11/06 12:16:14 INFO mapreduce.Job:  map 0% reduce 0%
+23/11/06 12:16:20 INFO mapreduce.Job:  map 100% reduce 0%
+23/11/06 12:16:27 INFO mapreduce.Job:  map 100% reduce 33%
+23/11/06 12:16:28 INFO mapreduce.Job:  map 100% reduce 67%
+23/11/06 12:16:29 INFO mapreduce.Job:  map 100% reduce 100%
+23/11/06 12:16:30 INFO mapreduce.Job: Job job_1699073844909_0017 completed successfully
+23/11/06 12:16:30 INFO mapreduce.Job: Counters: 50
+	File System Counters
+		FILE: Number of bytes read=90433
+		FILE: Number of bytes written=757561
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=46265
+		HDFS: Number of bytes written=17049
+		HDFS: Number of read operations=12
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=6
+	Job Counters 
+		Killed reduce tasks=1
+		Launched map tasks=1
+		Launched reduce tasks=3
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=2516
+		Total time spent by all reduces in occupied slots (ms)=9818
+		Total time spent by all map tasks (ms)=2516
+		Total time spent by all reduce tasks (ms)=9818
+		Total vcore-milliseconds taken by all map tasks=2516
+		Total vcore-milliseconds taken by all reduce tasks=9818
+		Total megabyte-milliseconds taken by all map tasks=2576384
+		Total megabyte-milliseconds taken by all reduce tasks=10053632
+	Map-Reduce Framework
+		Map input records=649
+		Map output records=7623
+		Map output bytes=75169
+		Map output materialized bytes=90433
+		Input split bytes=127
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=1683
+		Reduce shuffle bytes=90433
+		Reduce input records=7623
+		Reduce output records=1683
+		Spilled Records=15246
+		Shuffled Maps =3
+		Failed Shuffles=0
+		Merged Map outputs=3
+		GC time elapsed (ms)=358
+		CPU time spent (ms)=3400
+		Physical memory (bytes) snapshot=943415296
+		Virtual memory (bytes) snapshot=6330433536
+		Total committed heap usage (bytes)=1011875840
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=46138
+	File Output Format Counters 
+		Bytes Written=17049
+[cloudera@quickstart wordcount]$ hdfs dfs -cat word_cnt_out1
+cat: `word_cnt_out1': Is a directory
+[cloudera@quickstart wordcount]$ hdfs dfs -ls word_cnt_out1
+Found 4 items
+-rw-r--r--   1 cloudera cloudera          0 2023-11-06 12:16 word_cnt_out1/_SUCCESS
+-rw-r--r--   1 cloudera cloudera       5768 2023-11-06 12:16 word_cnt_out1/part-r-00000
+-rw-r--r--   1 cloudera cloudera       5363 2023-11-06 12:16 word_cnt_out1/part-r-00001
+-rw-r--r--   1 cloudera cloudera       5918 2023-11-06 12:16 word_cnt_out1/part-r-00002
+[cloudera@quickstart wordcount]$ hdfs dfs 
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] <localsrc> ... <dst>]
+	[-copyToLocal [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] [-v] [-x] <path> ...]
+	[-cp [-f] [-p | -p[topax]] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] [-x] <path> ...]
+	[-expunge]
+	[-find <path> ... <expression> ...]
+	[-get [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] <src> <localdst>]
+	[-help [cmd ...]]
+	[-ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] <file>]
+	[-test -[defsz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touchz <path> ...]
+	[-usage [cmd ...]]
+
+Generic options supported are
+-conf <configuration file>     specify an application configuration file
+-D <property=value>            use value for given property
+-fs <local|namenode:port>      specify a namenode
+-jt <local|resourcemanager:port>    specify a ResourceManager
+-files <comma separated list of files>    specify comma separated files to be copied to the map reduce cluster
+-libjars <comma separated list of jars>    specify comma separated jar files to include in the classpath.
+-archives <comma separated list of archives>    specify comma separated archives to be unarchived on the compute machines.
+
+The general command line syntax is
+bin/hadoop command [genericOptions] [commandOptions]
+
+[cloudera@quickstart wordcount]$ sudo find / -name example
+/usr/share/doc/solr-doc-4.10.3+cdh5.13.0+519/example
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/hadoop-mapreduce1/api/org/apache/hadoop/contrib/index/example
+/usr/lib/hue/apps/hbase/example
+[cloudera@quickstart wordcount]$ sudo find / -type d -name example
+/usr/share/doc/solr-doc-4.10.3+cdh5.13.0+519/example
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/hadoop-mapreduce1/api/org/apache/hadoop/contrib/index/example
+/usr/lib/hue/apps/hbase/example
+[cloudera@quickstart wordcount]$ sudo find / -type d -name examples
+/opt/examples
+/var/lib/oozie/tomcat-deployment/webapps/oozie/ext-2.2/examples
+/var/lib/oozie/ext-2.2/examples
+/usr/share/festival/examples
+/usr/share/doc/whirr-0.9.0+cdh5.13.0+23/apidocs/org/apache/whirr/examples
+/usr/share/doc/pygobject2-2.20.0/examples
+/usr/share/doc/wpa_supplicant-0.7.3/examples
+/usr/share/doc/pig-0.12.0+cdh5.13.0+110/examples
+/usr/share/doc/hadoop-0.20-mapreduce/examples
+/usr/share/doc/hadoop-0.20-mapreduce/examples/src/org/apache/hadoop/examples
+/usr/share/doc/perl-Error-0.17015/examples
+/usr/share/doc/search-1.0.0+cdh5.13.0+0/examples
+/usr/share/doc/python-pycurl-7.19.0/examples
+/usr/share/doc/pygtk2-2.16.0/examples
+/usr/share/doc/postfix-2.6.6/examples
+/usr/share/doc/hive-1.1.0+cdh5.13.0+1269/examples
+/usr/share/doc/pycairo-1.8.6/examples
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/api/org/apache/hadoop/security/authentication/examples
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/api/org/apache/hadoop/examples
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/hadoop-mapreduce1/api/org/apache/hadoop/examples
+/usr/share/doc/gnupg2-2.0.14/examples
+/usr/share/doc/git-1.7.1/contrib/examples
+/usr/share/doc/pygpgme-0.1/examples
+/usr/share/perl5/CGI/examples
+/usr/lib/spark/examples
+/usr/lib/hue/apps/pig/examples
+/usr/lib/hue/apps/search/examples
+/usr/lib/hue/apps/oozie/examples
+/usr/lib64/cmf/agent/build/env/lib/python2.6/site-packages/multiprocessing-2.6.2.1-py2.6-linux-x86_64.egg/multiprocessing/examples
+[cloudera@quickstart wordcount]$ sudo find / -type d -name examples | grep map
+/usr/share/doc/hadoop-0.20-mapreduce/examples
+/usr/share/doc/hadoop-0.20-mapreduce/examples/src/org/apache/hadoop/examples
+/usr/share/doc/hadoop-2.6.0+cdh5.13.0+2639/hadoop-mapreduce1/api/org/apache/hadoop/examples
+[cloudera@quickstart wordcount]$ cd /usr/share/doc/hadoop-0.20-mapreduce/examples/src/org/apache/hadoop/examples
+[cloudera@quickstart examples]$ gedit WordCount.java 
+
+

@@ -1,0 +1,209 @@
+[cloudera@quickstart HDFS_API]$ sudo find / -type f -name core-site
+[cloudera@quickstart HDFS_API]$ sudo find / -type f -name core-site.xml
+/etc/hadoop/conf.empty/core-site.xml
+/etc/hadoop/conf.impala/core-site.xml
+/etc/hadoop/conf.pseudo/core-site.xml
+/etc/oozie/conf.dist/hadoop-conf/core-site.xml
+/etc/hadoop-kms/conf.dist/core-site.xml
+/usr/lib/hadoop-0.20-mapreduce/example-confs/conf.secure/core-site.xml
+/usr/lib/hadoop-0.20-mapreduce/example-confs/conf.pseudo/core-site.xml
+[cloudera@quickstart HDFS_API]$ vim /usr/lib/hadoop-0.20-mapreduce/example-confs/conf.pseudo/core-site.xml
+[cloudera@quickstart HDFS_API]$ ls /usr/lib/hadoop-0.20-mapreduce/example-confs/conf.pseudo/
+core-site.xml  hadoop-metrics.properties  hdfs-site.xml  mapred-site.xml  README
+[cloudera@quickstart HDFS_API]$ vim /usr/lib/hadoop-0.20-mapreduce/example-confs/conf.pseudo/core-site.xml
+[cloudera@quickstart HDFS_API]$ ls /usr/lib/hadoop-0.20-mapreduce/example-confs
+conf.pseudo  conf.secure
+[cloudera@quickstart HDFS_API]$ ls /usr/lib/hadoop-0.20-mapreduce/example-confs/conf.secure/
+configuration.xsl  hadoop-env.sh              hadoop-policy.xml  log4j.properties       mapred-site.xml  slaves
+core-site.xml      hadoop-metrics.properties  hdfs-site.xml      mapred-queue-acls.xml  masters          taskcontroller.cfg
+[cloudera@quickstart HDFS_API]$ vim /usr/lib/hadoop-0.20-mapreduce/example-confs/conf.secure/core-site.xml 
+[cloudera@quickstart HDFS_API]$ cd
+[cloudera@quickstart ~]$ cd -
+/home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API
+[cloudera@quickstart HDFS_API]$ ls
+counties  hdfs_api.jar  InputCounties.java  ReadMe.txt
+[cloudera@quickstart HDFS_API]$ cd --
+[cloudera@quickstart ~]$ cd
+[cloudera@quickstart ~]$ cd ..
+[cloudera@quickstart home]$ cd
+[cloudera@quickstart ~]$ cd -
+/home
+[cloudera@quickstart home]$ cd
+[cloudera@quickstart ~]$ cd
+[cloudera@quickstart ~]$ jar -tf hdfs_api.jar
+java.io.FileNotFoundException: hdfs_api.jar (No such file or directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:215)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:145)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:116)
+	at sun.tools.jar.Main.list(Main.java:1004)
+	at sun.tools.jar.Main.run(Main.java:245)
+	at sun.tools.jar.Main.main(Main.java:1177)
+[cloudera@quickstart ~]$ cd
+[cloudera@quickstart ~]$ cd -
+/home/cloudera
+[cloudera@quickstart ~]$ cd /home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API
+[cloudera@quickstart HDFS_API]$ ls
+counties  hdfs_api.jar  InputCounties.java  ReadMe.txt
+[cloudera@quickstart HDFS_API]$ jar -tf hdfs_api.jar 
+META-INF/MANIFEST.MF
+hdfs/counties/counties_1.csv
+hdfs/counties/counties_2.csv
+hdfs/counties/counties_3.csv
+hdfs/counties/counties_4.csv
+[cloudera@quickstart HDFS_API]$ jar
+Usage: jar {ctxui}[vfm0Me] [jar-file] [manifest-file] [entry-point] [-C dir] files ...
+Options:
+    -c  create new archive
+    -t  list table of contents for archive
+    -x  extract named (or all) files from archive
+    -u  update existing archive
+    -v  generate verbose output on standard output
+    -f  specify archive file name
+    -m  include manifest information from specified manifest file
+    -e  specify application entry point for stand-alone application 
+        bundled into an executable jar file
+    -0  store only; use no ZIP compression
+    -M  do not create a manifest file for the entries
+    -i  generate index information for the specified jar files
+    -C  change to the specified directory and include the following file
+If any file is a directory then it is processed recursively.
+The manifest file name, the archive file name and the entry point name are
+specified in the same order as the 'm', 'f' and 'e' flags.
+
+Example 1: to archive two class files into an archive called classes.jar: 
+       jar cvf classes.jar Foo.class Bar.class 
+Example 2: use an existing manifest file 'mymanifest' and archive all the
+           files in the foo/ directory into 'classes.jar': 
+       jar cvfm classes.jar mymanifest -C foo/ .
+
+[cloudera@quickstart HDFS_API]$ ls
+counties  hdfs_api.jar  InputCounties.java  ReadMe.txt
+[cloudera@quickstart HDFS_API]$ cat ReadMe.txt 
+1) In Eclipse export the jar from this project having name as inputcounties.jar
+2) Make sure that the jar is at the project base folder (i.e HDFS_API)
+3) Assumption is that counties folder(having *.csv files) is in the project base 
+folder
+4) Run the jar using following command on project base folder
+yarn jar inputcounties.jar hdfs.InputCounties
+
+[cloudera@quickstart HDFS_API]$ pwd
+/home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API
+[cloudera@quickstart HDFS_API]$ yarn jar hdfs_api.jar hdfs.InputCounties
+Exception in thread "main" java.lang.ClassNotFoundException: hdfs.InputCounties
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:270)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+[cloudera@quickstart HDFS_API]$ yarn jar hdfs_api.jar hdfs.InputCounties
+Exception in thread "main" java.lang.ClassNotFoundException: hdfs.InputCounties
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:270)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+[cloudera@quickstart HDFS_API]$ hdfs dfs -ls -R
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 04:08 data
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-11-01 00:16 data.txt
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 04:09 dir1
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 20:47 dir2
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 20:58 dir2/dir2.1
+-rw-r--r--   5 cloudera  cloudera       1350 2023-11-02 20:58 dir2/dir2.1/small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera       1350 2023-11-01 04:11 small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera    3613198 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 21:54 tes1
+-rw-r--r--   1 cloudera  cloudera        222 2023-11-02 21:54 tes1/newfile
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 21:52 tes1/test2
+drwxr-xr-x   - cloudera  cloudera          0 2023-10-31 23:49 test
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera  cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-01 04:29 test/test1
+drwxr-xr-x   - cloudera  cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart HDFS_API]$ yarn jar hdfs_api2.jar hdfs.InputCounties
+Not a valid JAR: /home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API/hdfs_api2.jar
+[cloudera@quickstart HDFS_API]$ cd ..
+[cloudera@quickstart Lab1.2]$ ls
+HDFS_API  hdfs_api2.jar
+[cloudera@quickstart Lab1.2]$ mv hdfs_api2.jar HDFS_API/
+[cloudera@quickstart Lab1.2]$ cd -
+/home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API
+[cloudera@quickstart HDFS_API]$ yarn jar hdfs_api2.jar hdfs.InputCounties
+[cloudera@quickstart HDFS_API]$ hdfs dfs -ls -R
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 02:23 counties
+-rw-r--r--   1 cloudera  cloudera      62890 2023-11-03 02:23 counties/counties_1.csv
+-rw-r--r--   1 cloudera  cloudera      58423 2023-11-03 02:23 counties/counties_2.csv
+-rw-r--r--   1 cloudera  cloudera      44294 2023-11-03 02:23 counties/counties_3.csv
+-rw-r--r--   1 cloudera  cloudera      54237 2023-11-03 02:23 counties/counties_4.csv
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 04:08 data
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-11-01 00:16 data.txt
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 04:09 dir1
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 20:47 dir2
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 20:58 dir2/dir2.1
+-rw-r--r--   5 cloudera  cloudera       1350 2023-11-02 20:58 dir2/dir2.1/small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera       1350 2023-11-01 04:11 small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera    3613198 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 21:54 tes1
+-rw-r--r--   1 cloudera  cloudera        222 2023-11-02 21:54 tes1/newfile
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 21:52 tes1/test2
+drwxr-xr-x   - cloudera  cloudera          0 2023-10-31 23:49 test
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera  cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-01 04:29 test/test1
+drwxr-xr-x   - cloudera  cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart HDFS_API]$ pwd
+/home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API
+[cloudera@quickstart HDFS_API]$ cd ~
+[cloudera@quickstart ~]$ cd workspace/hdfs_newproject/src/hdfs/
+[cloudera@quickstart hdfs]$ ls
+[cloudera@quickstart hdfs]$ cp /home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API/InputCounties.java  .
+[cloudera@quickstart hdfs]$ cd /home/cloudera/hdp/pigandhive/labs/Lab1.2/HDFS_API
+[cloudera@quickstart HDFS_API]$ ls
+counties  hdfs_api2.jar  hdfs_api.jar  InputCounties.java  ReadMe.txt
+[cloudera@quickstart HDFS_API]$ cd ..
+[cloudera@quickstart Lab1.2]$ ls
+HDFS_API  hdfs_api2.jar  hdfs_api3.jar
+[cloudera@quickstart Lab1.2]$ mv hdfs_api3.jar HDFS_API/
+[cloudera@quickstart Lab1.2]$ cd hdfs_api2.jar 
+bash: cd: hdfs_api2.jar: Not a directory
+[cloudera@quickstart Lab1.2]$ cd HDFS_API/
+[cloudera@quickstart HDFS_API]$ yarn jar hdfs_api3.jar hdfs.InputCounties
+[cloudera@quickstart HDFS_API]$ hdfs dfs -ls -R
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 02:23 counties
+-rw-r--r--   1 cloudera  cloudera      62890 2023-11-03 02:23 counties/counties_1.csv
+-rw-r--r--   1 cloudera  cloudera      58423 2023-11-03 02:23 counties/counties_2.csv
+-rw-r--r--   1 cloudera  cloudera      44294 2023-11-03 02:23 counties/counties_3.csv
+-rw-r--r--   1 cloudera  cloudera      54237 2023-11-03 02:23 counties/counties_4.csv
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-03 02:34 counties2
+-rw-r--r--   1 cloudera  cloudera      62890 2023-11-03 02:34 counties2/counties_1.csv
+-rw-r--r--   1 cloudera  cloudera      58423 2023-11-03 02:34 counties2/counties_2.csv
+-rw-r--r--   1 cloudera  cloudera      44294 2023-11-03 02:34 counties2/counties_3.csv
+-rw-r--r--   1 cloudera  cloudera      54237 2023-11-03 02:34 counties2/counties_4.csv
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 04:08 data
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-11-01 00:16 data.txt
+drwxr-xr-x   - kartikera cloudera          0 2023-11-01 04:09 dir1
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 20:47 dir2
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 20:58 dir2/dir2.1
+-rw-r--r--   5 cloudera  cloudera       1350 2023-11-02 20:58 dir2/dir2.1/small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera       1350 2023-11-01 04:11 small_blocks.txt
+-rw-r--r--   1 cloudera  cloudera    3613198 2023-10-31 03:51 stocks.csv
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 21:54 tes1
+-rw-r--r--   1 cloudera  cloudera        222 2023-11-02 21:54 tes1/newfile
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-02 21:52 tes1/test2
+drwxr-xr-x   - cloudera  cloudera          0 2023-10-31 23:49 test
+-rw-r--r--   1 cloudera  cloudera    1529355 2023-10-31 23:49 test/data.txt
+-rw-r--r--   1 cloudera  cloudera       1350 2023-10-31 23:49 test/small_blocks.txt
+drwxr-xr-x   - cloudera  cloudera          0 2023-11-01 04:29 test/test1
+drwxr-xr-x   - cloudera  cloudera          0 2023-10-31 23:46 test/test1/test3
+[cloudera@quickstart HDFS_API]$ ^C
+[cloudera@quickstart HDFS_API]$ 
