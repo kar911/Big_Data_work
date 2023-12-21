@@ -1,0 +1,7 @@
+#!/bin/bash
+echo Hello, ${USER^} 
+echo I will now back up your home directory, $HOME
+echo You are running this script from $(pwd).
+echo Therefore, I will save the backup in $(pwd)
+tar cf ${PWD##*/}new.tar $(pwd)/*
+echo Backup Completed Successfully.
